@@ -4,6 +4,12 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
+    colors: {
+      'rentlaranja': '#ff914d',
+      'rentazul': '#011e44',
+      'rentbranco': '#ffffff',
+      'rentcinza': '#cccccc'
+    },
     extend: {},
   },
   plugins: [],

@@ -1,0 +1,38 @@
+<div class="flex flex-col items-center justify-center">
+  <h1 class="flex-none">
+    Imóveis > Listagem
+  </h1>
+  <div class="flex gap-12">
+    <div class="block max-w-sm p-5 bg-white border border-rentcinza rounded-2xl shadow-lg" *ngFor="let imovel of imoveis">
+      <div class="flex flex-col gap-y-7 w-72">
+        <div>
+          <h2 class="text-3xl text-rentazul truncate ..."><b>{{ imovel.nome }}</b></h2>
+          <ng-container [ngSwitch]="imovel.tipo">
+            <h3 *ngSwitchCase="1" class="text-xl text-rentazul">Casa</h3>
+            <h3 *ngSwitchCase="2" class="text-xl text-rentazul">Apartamento</h3>
+            <h3 *ngSwitchCase="3" class="text-xl text-rentazul">Unidade Secundária</h3>
+          </ng-container>
+        </div>
+        <div>
+          <h3 class="text-xl text-rentazul mb-2"><b>Endereço</b></h3>
+          <div class="block max-w-sm p-3 bg-white border border-rentcinza rounded-2xl">
+            <p>{{ imovel.endereco.rua }} - {{ imovel.endereco.numero }}</p>
+            <p>{{ imovel.endereco.cidade }}, {{ imovel.endereco.estado }}, {{ imovel.endereco.pais }}</p>
+            <p class="text-rentazul"><b>CEP:</b> {{imovel.endereco.cep}}</p>
+          </div>
+        </div>
+        <p class="text-xl text-rentazul"><b>Capacidade:</b> &nbsp;&nbsp; <span class="text-lg">{{ imovel.capacidadePessoas }}</span> pessoas</p>
+        <p class="text-xl text-rentazul"><b>Quartos:</b> &nbsp;&nbsp; <span class="text-lg">{{ imovel.qtdQuarto }}</span> quartos</p>
+        <p class="text-xl text-rentazul"><b>Ocupado:</b> &nbsp;&nbsp; <span class="text-lg">{{ imovel.isOcupado }}</span> </p>
+        <div class="flex gap-4">
+          <button class="text-xl bg-rentlaranja text-rentbranco py-5 px-12 w-3/4 rounded-2xl shadow-md">
+            <b>Editar</b>
+          </button>
+          <button class="text-xl bg-rentbranco text-rentlaranja border-2 border-rentlaranja p-5 w-1/4 rounded-2xl shadow-md">
+            <b>X</b>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

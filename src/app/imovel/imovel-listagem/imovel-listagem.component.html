@@ -1,36 +1,82 @@
-<div class="flex flex-col items-center justify-center">
-  <h1 class="flex-none">
-    Imóveis > Listagem
-  </h1>
-  <div class="flex gap-12">
-    <div class="block max-w-sm p-5 bg-white border border-rentcinza rounded-2xl shadow-lg" *ngFor="let imovel of imoveis">
-      <div class="flex flex-col gap-y-7 w-72">
-        <div>
-          <h2 class="text-3xl text-rentazul truncate ..."><b>{{ imovel.nome }}</b></h2>
-          <ng-container [ngSwitch]="imovel.tipo">
-            <h3 *ngSwitchCase="1" class="text-xl text-rentazul">Casa</h3>
-            <h3 *ngSwitchCase="2" class="text-xl text-rentazul">Apartamento</h3>
-            <h3 *ngSwitchCase="3" class="text-xl text-rentazul">Unidade Secundária</h3>
-          </ng-container>
-        </div>
-        <div>
-          <h3 class="text-xl text-rentazul mb-2"><b>Endereço</b></h3>
-          <div class="block max-w-sm p-3 bg-white border border-rentcinza rounded-2xl">
-            <p>{{ imovel.endereco.rua }} - {{ imovel.endereco.numero }}</p>
-            <p>{{ imovel.endereco.cidade }}, {{ imovel.endereco.estado }}, {{ imovel.endereco.pais }}</p>
-            <p class="text-rentazul"><b>CEP:</b> {{imovel.endereco.cep}}</p>
+<div class="flex flex-col gap-8">
+
+  <div class="flex items-center justify-evenly space-x-2 flex-start pt-10">
+    <h1 class="flex items-center gap-5 text-rentazul">
+      <b><span class="text-5xl">Imóveis</span></b>
+      <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png" alt="forward--v1"/>
+      <span class="text-4xl">Listagem</span>
+    </h1>
+    <img src="https://i.imgur.com/brCEmd5.png" alt="Logo Renttavel" class="w-72 h-16">
+  </div>
+
+  <div class="flex items-center justify-center">
+    <div class="flex items-center border border-rentcinza w-3/12 pl-8 pr-2 rounded-full gap-x-4 shadow-md">
+      <input class="w-7/12 h-10 text-lg focus:outline-none my-2" type="text" placeholder="Nome">
+      <div class="w-px h-9 bg-rentcinza"></div>
+      <button class="flex items-center justify-center w-3/12 text-xl text-rentcinza">
+        <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/cccccc/sorting-options.png" alt="sorting-options"/>
+         &nbsp;Filtros
+      </button>
+      <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md">
+        <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/search--v1.png" alt="search--v1"/>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex justify-center mr-96 gap-2 items-center">
+    <label class="text-rentazul" for="limitePg">Itens por página: </label>
+      <select class="text-rentazul rounded border border-rentcinza p-2 hover:outline-none" name="limitePg">
+        <option value="3">3</option>
+        <option value="5">6</option>
+        <option value="10">9</option>
+      </select>
+    <span class="text-rentazul mx-6"> 1-3 de 6 imóveis </span>
+    <div class="flex items-center gap-7">
+      <button class="btn" id="btnPaginacao" id="navPaginacao">
+        <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/cccccc/back.png" alt="back"/>
+      </button>
+      <button class="btn" id="btnPaginacao" id="navPaginacao">
+        <img width="25" height="25" src="https://img.icons8.com/ios-filled/50/cccccc/forward--v1.png" alt="forward--v1"/>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex justify-center mb-10">
+    <div class="grid grid-cols-3 grid-rows-col gap-10">
+      <div class="flex flex-col w-72 p-5 bg-white border border-rentcinza rounded-2xl shadow-lg" *ngFor="let imovel of imoveis">
+        <div class="flex flex-col gap-y-4">
+          <div>
+            <h2 class="text-2xl text-rentazul truncate"><b>{{ imovel.nome }}</b></h2>
+            <ng-container [ngSwitch]="imovel.tipo">
+              <h3 *ngSwitchCase="1" class="text-lg text-rentazul">Casa</h3>
+              <h3 *ngSwitchCase="2" class="text-lg text-rentazul">Apartamento</h3>
+              <h3 *ngSwitchCase="3" class="text-lg text-rentazul">Unidade Secundária</h3>
+            </ng-container>
           </div>
-        </div>
-        <p class="text-xl text-rentazul"><b>Capacidade:</b> &nbsp;&nbsp; <span class="text-lg">{{ imovel.capacidadePessoas }}</span> pessoas</p>
-        <p class="text-xl text-rentazul"><b>Quartos:</b> &nbsp;&nbsp; <span class="text-lg">{{ imovel.qtdQuarto }}</span> quartos</p>
-        <p class="text-xl text-rentazul"><b>Ocupado:</b> &nbsp;&nbsp; <span class="text-lg">{{ imovel.isOcupado }}</span> </p>
-        <div class="flex gap-4">
-          <button class="text-xl bg-rentlaranja text-rentbranco py-5 px-12 w-3/4 rounded-2xl shadow-md">
-            <b>Editar</b>
-          </button>
-          <button class="text-xl bg-rentbranco text-rentlaranja border-2 border-rentlaranja p-5 w-1/4 rounded-2xl shadow-md">
-            <b>X</b>
-          </button>
+          <div>
+            <h3 class="text-lg text-rentazul mb-2"><b>Endereço</b></h3>
+            <div class="flex flex-col gap-1 p-3 bg-white border border-rentcinza rounded-2xl">
+              <p class="flex"><span class="max-w-40 truncate">{{ imovel.endereco.rua }}</span> - {{ imovel.endereco.numero }}</p>
+              <p class="flex"><span class="max-w-32 truncate">{{ imovel.endereco.cidade }}</span>, {{ imovel.endereco.estado }}, {{ imovel.endereco.pais }}</p>
+              <p class="text-rentazul"><b>CEP:</b> {{imovel.endereco.cep}}</p>
+            </div>
+          </div>
+          <p class="text-lg text-rentazul"><b>Capacidade:</b> &nbsp; <span class="text-base">{{ imovel.capacidadePessoas }} pessoa(s)</span> </p>
+          <p class="text-lg text-rentazul"><b>Quartos:</b> &nbsp; <span class="text-base">{{ imovel.qtdQuarto }} quarto(s)</span> </p>
+          <p class="text-lg text-rentazul"><b>Ocupado:</b> &nbsp;
+            <ng-container [ngSwitch]="imovel.isOcupado">
+              <span class="text-base text-rentazul" *ngSwitchCase="true">Sim</span>
+              <span class="text-base text-rentazul" *ngSwitchCase="false">Não</span>
+            </ng-container>
+          </p>
+          <div class="flex gap-2">
+            <button class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-10 w-5/6 h-14 rounded-2xl shadow-md">
+              <b>Editar</b> <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png" alt="edit--v1"/>
+            </button>
+            <button class="flex items-center justify-center text-xl bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-3 w-2/6 h-14 rounded-2xl shadow-md">
+              <img width="33" height="33" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
+            </button>
+          </div>
         </div>
       </div>
     </div>

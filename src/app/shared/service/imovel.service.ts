@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Imovel } from '../model/imovel';
+import { ImovelSeletor } from '../model/seletor/imovel.seletor';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,9 @@ export class ImovelService {
 
   consultarTodos(): Observable<Array<Imovel>>{
     return this.httpClient.get<Array<Imovel>>(this.API + '/todos')
+  }
+
+  consultarComSeletor(seletor: ImovelSeletor): Observable<Array<Imovel>>{
+    return this.httpClient.post<Array<Imovel>>(this.API + '/filtro', seletor)
   }
 }

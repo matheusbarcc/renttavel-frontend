@@ -1,41 +1,47 @@
-<aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto bg-rentazul">
-    <a href="#" class="flex flex-col items-center p-2 text-rentbranco rounded-lg group mb-6">
-      <span class="text-xl flex-1 ms-3 whitespace-nowrap font-bold">Tio Paulo</span>
-      <span class="text-lg flex-1 ms-3 whitespace-nowrap font-light">{{ 'paulo.tio@gmail.com' }}</span>
-    </a>
-     <ul class="flex flex-col ml-8 space-y-2 font-bold gap-y-6">
-        <li>
-           <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-              <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/60/FFFFFF/combo-chart--v1.png" alt="combo-chart--v1"/>
-              <span class="text-xl flex-1 ms-3 whitespace-nowrap">Dashboard</span>
-           </a>
-        </li>
-        <li>
-          <a href="/imovel" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <img width="30" height="30" src="https://img.icons8.com/material-rounded/35/FFFFFF/home-page.png" alt="home-page"/>
-            <span class="text-xl flex-1 ms-3 whitespace-nowrap">Imóveis</span>
-         </a>
-        </li>
-        <li>
-           <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-              <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/sell-property--v1.png" alt="sell-property--v1"/>
-              <span class="text-xl flex-1 ms-3 whitespace-nowrap">Aluguéis</span>
-           </a>
-        </li>
-        <li>
-           <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-              <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/map-marker.png" alt="map-marker"/>
-              <span class="text-xl flex-1 ms-3 whitespace-nowrap">Endereços</span>
-           </a>
-        </li>
-        <li>
-           <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-              <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/group.png" alt="group"/>
-              <span class="text-xl flex-1 ms-3 whitespace-nowrap">Inquilinos</span>
-           </a>
-        </li>
-     </ul>
+<div class="flex">
+  <div class="w-64">
+    <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen" aria-label="Sidebar">
+      <div class="h-full px-3 py-4 overflow-y-auto bg-rentazul">
+        <a href="#" class="flex flex-col items-center p-2 text-rentbranco rounded-lg group mb-6">
+          <span class="text-xl flex-1 ms-3 whitespace-nowrap font-bold">Tio Paulo</span>
+          <span class="text-lg flex-1 ms-3 whitespace-nowrap font-light">{{ 'paulo.tio@gmail.com' }}</span>
+        </a>
+         <ul class="flex flex-col px-7 space-y-2 font-bold gap-y-6">
+            <li>
+               <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/60/FFFFFF/combo-chart--v1.png" alt="combo-chart--v1"/>
+                  <span class="text-xl flex-1 ms-3 whitespace-nowrap">Dashboard</span>
+               </a>
+            </li>
+            <li>
+              <a href="/imovel" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <img width="30" height="30" src="https://img.icons8.com/material-rounded/35/FFFFFF/home-page.png" alt="home-page"/>
+                <span class="text-xl flex-1 ms-3 whitespace-nowrap">Imóveis</span>
+             </a>
+            </li>
+            <li>
+               <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/sell-property--v1.png" alt="sell-property--v1"/>
+                  <span class="text-xl flex-1 ms-3 whitespace-nowrap">Aluguéis</span>
+               </a>
+            </li>
+            <li>
+               <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/map-marker.png" alt="map-marker"/>
+                  <span class="text-xl flex-1 ms-3 whitespace-nowrap">Endereços</span>
+               </a>
+            </li>
+            <li>
+               <a href="#" class="flex items-center p-2 text-rentbranco rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/group.png" alt="group"/>
+                  <span class="text-xl flex-1 ms-3 whitespace-nowrap">Inquilinos</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+    </aside>
   </div>
-</aside>
-<router-outlet></router-outlet>
+  <div class="flex-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>

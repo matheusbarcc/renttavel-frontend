@@ -10,6 +10,7 @@ import { ImovelService } from '../../shared/service/imovel.service';
 export class ImovelListagemComponent implements OnInit{
 
   public imoveis: Imovel[] = [];
+  public isModalOpen: boolean;
 
   constructor(private imovelService: ImovelService) { }
 
@@ -23,4 +24,13 @@ export class ImovelListagemComponent implements OnInit{
       }
     )
   }
+
+  abrirFiltros(): void {
+    this.isModalOpen = true;
+  }
+
+  fecharFiltros(): void {
+    this.isModalOpen = false;
+  }
+
 }

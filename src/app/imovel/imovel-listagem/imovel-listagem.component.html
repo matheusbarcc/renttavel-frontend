@@ -1,6 +1,6 @@
-<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-8 ">
 
-  <div class="flex items-center justify-evenly space-x-2 flex-start pt-10">
+  <div class="flex items-center justify-between space-x-2 flex-start pt-10 px-32">
     <h1 class="flex items-center gap-5 text-rentazul">
       <b><span class="text-5xl">Imóveis</span></b>
       <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png" alt="forward--v1"/>
@@ -10,39 +10,44 @@
   </div>
 
   <div class="flex items-center justify-center">
-    <div class="flex items-center border border-rentcinza w-3/12 pl-8 pr-2 rounded-full gap-x-4 shadow-md">
+    <div class="flex items-center border border-rentcinza w-4/12 pl-8 pr-2 rounded-full gap-x-4 shadow-md">
       <input class="w-7/12 h-10 text-lg focus:outline-none my-2" type="text" placeholder="Nome">
       <div class="w-px h-9 bg-rentcinza"></div>
-      <button class="flex items-center justify-center w-3/12 text-xl text-rentcinza">
+      <button (click)="abrirFiltros()" class="flex items-center justify-center w-3/12 text-xl text-rentcinza">
         <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/cccccc/sorting-options.png" alt="sorting-options"/>
          &nbsp;Filtros
       </button>
       <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md">
-        <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/search--v1.png" alt="search--v1"/>
+        <img width="25" height="25" src="https://img.icons8.com/sf-black/25/FFFFFF/search.png" alt="search"/>
       </button>
     </div>
   </div>
 
-  <div class="flex justify-center mr-96 gap-2 items-center">
+  <div class="flex justify-start ml-48 gap-2 items-center">
     <label class="text-rentazul" for="limitePg">Itens por página: </label>
       <select class="text-rentazul rounded border border-rentcinza p-2 hover:outline-none" name="limitePg">
-        <option value="3">3</option>
-        <option value="5">6</option>
-        <option value="10">9</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="12">12</option>
       </select>
     <span class="text-rentazul mx-6"> 1-3 de 6 imóveis </span>
     <div class="flex items-center gap-7">
-      <button class="btn" id="btnPaginacao" id="navPaginacao">
-        <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/cccccc/back.png" alt="back"/>
+      <button class="disabled:opacity-30" id="btnPaginacao" id="navPaginacao">
+        <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/back.png" alt="back"/>
       </button>
-      <button class="btn" id="btnPaginacao" id="navPaginacao">
-        <img width="25" height="25" src="https://img.icons8.com/ios-filled/50/cccccc/forward--v1.png" alt="forward--v1"/>
+      <button class="disabled:opacity-30" id="btnPaginacao" id="navPaginacao">
+        <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/forward--v1.png" alt="forward--v1"/>
       </button>
     </div>
   </div>
 
   <div class="flex justify-center mb-10">
-    <div class="grid grid-cols-3 grid-rows-col gap-10">
+    <div class="grid gap-10 mx-auto" [ngClass]="{
+      'grid-cols-1': imoveis.length === 1,
+      'grid-cols-2': imoveis.length === 2,
+      'grid-cols-3': imoveis.length === 3,
+      'grid-cols-4': imoveis.length >= 4
+    }">
       <div class="flex flex-col w-72 p-5 bg-white border border-rentcinza rounded-2xl shadow-lg" *ngFor="let imovel of imoveis">
         <div class="flex flex-col gap-y-4">
           <div>
@@ -82,3 +87,112 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="isModalOpen"  class="modal-overlay fixed inset-0 flex items-center justify-center bg-rentpreto bg-opacity-50 backdrop-filter ml-64">
+  <div class="modal-content bg-rentbranco flex flex-col border border-rentcinza w-5/12 rounded-3xl">
+    <div class="flex justify-between items-center py-3 px-8">
+      <button (click)="fecharFiltros()">
+        <img width="20" height="20" src="https://img.icons8.com/ios/25/021e43/delete-sign--v1.png" alt="delete-sign--v1"/>
+      </button>
+      <h2 class="flex-1 text-center text-rentazul text-2xl"><b>Filtros</b></h2>
+    </div>
+    <hr class="w-full border-rentcinza">
+    <div class="flex flex-col px-10 py-5 gap-5">
+      <div class="flex flex-col gap-y-3 text-rentazul">
+        <b><h3 class=" text-xl">Tipo do imóvel</h3></b>
+        <div class="flex justify-start gap-x-5">
+          <button class="flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-6 rounded-2xl">
+            <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/home--v1.png" alt="home--v1"/>
+            <span class="ml-1 text-lg">Casa</span>
+          </button>
+          <button class="flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-6 rounded-2xl">
+            <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/apartment.png" alt="apartment"/>
+            <span class="ml-1 text-lg">Apartamento</span>
+          </button>
+          <button class="flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-2 rounded-2xl">
+            <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/real-estate.png" alt="real-estate"/>
+            <div>
+              <span class="flex ml-1 items-start text-base">Unidade</span>
+              <span class="ml-1 text-base">Secundária</span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="text-rentazul text-xl">
+        <div class="flex flex-col gap-y-3 text-rentazul">
+          <b><h3>Capacidade de pessoas</h3></b>
+          <div class="flex justify-start gap-x-2">
+            <button class="text-base flex-1 border border-rentcinza px-4 rounded-2xl">
+              Qualquer
+            </button>
+            <button class="text-base flex-1 border border-rentcinza px-1 rounded-2xl">
+              1
+            </button>
+            <button class="text-base flex-1 border border-rentcinza p-1 rounded-2xl">
+              2
+            </button>
+            <button class="text-base flex-1 border border-rentcinza p-1 rounded-2xl">
+              3
+            </button>
+            <button class="text-base flex-1 border border-rentcinza p-1 rounded-2xl">
+              4
+            </button>
+            <button class="text-base flex-1 border border-rentcinza p-1 rounded-2xl">
+              5
+            </button>
+            <button class="text-base flex-1 border border-rentcinza p-1 rounded-2xl">
+              6
+            </button>
+            <button class="text-base flex-1 border border-rentcinza p-4 rounded-2xl">
+              7+
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="grid grid-cols-3 gap-x-5 text-rentazul text-xl">
+          <b><h3>Quartos</h3></b>
+          <b><h3>Camas</h3></b>
+          <b><h3>Banheiros</h3></b>
+        </div>
+        <div class="grid grid-cols-3 gap-x-5 text-rentazul text-xl">
+          <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="" id="">
+            <option value="1">Qualquer</option>
+          </select>
+          <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="" id="">
+            <option value="1">Qualquer</option>
+          </select>
+          <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="" id="">
+            <option value="1">Qualquer</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex flex-col gap-5">
+        <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl">
+          <div class="flex flex-col gap-y-3">
+            <b><h3>Ocupado</h3></b>
+            <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="" id="">
+              <option value="1">Qualquer</option>
+            </select>
+          </div>
+          <div class="col-span-2 flex flex-col gap-y-3">
+            <b><h3>Endereço</h3></b>
+            <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="" id="">
+              <option value="1">Qualquer</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <button class="border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md">
+          <p>Remover filtros</p>
+        </button>
+        <button class="flex items-center gap-4 bg-rentlaranja text-lg py-3 px-8 rounded-xl text-rentbranco font-semibold shadow-md">
+          <p>Filtrar</p>
+          <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/sorting-options.png" alt="sorting-options"/>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

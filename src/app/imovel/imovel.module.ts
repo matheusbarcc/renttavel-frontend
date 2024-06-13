@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ImovelRoutingModule } from './imovel-routing.module';
 import { ImovelListagemComponent } from './imovel-listagem/imovel-listagem.component';
-
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { ImovelListagemComponent } from './imovel-listagem/imovel-listagem.compo
   ],
   imports: [
     CommonModule,
-    ImovelRoutingModule
+    ImovelRoutingModule,
+    FormsModule,
   ],
 })
 export class ImovelModule { }

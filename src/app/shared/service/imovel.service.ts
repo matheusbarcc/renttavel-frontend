@@ -20,4 +20,12 @@ export class ImovelService {
   consultarComSeletor(seletor: ImovelSeletor): Observable<Array<Imovel>>{
     return this.httpClient.post<Array<Imovel>>(this.API + '/filtro', seletor)
   }
+
+  contarRegistros(seletor: ImovelSeletor): Observable<number>{
+    return this.httpClient.post<number>(this.API + '/total-registros', seletor)
+  }
+
+  contarPaginas(seletor: ImovelSeletor): Observable<number>{
+    return this.httpClient.post<number>(this.API + '/total-paginas', seletor)
+  }
 }

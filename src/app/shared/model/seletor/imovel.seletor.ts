@@ -1,4 +1,6 @@
-export class ImovelSeletor{
+import { BaseSeletor } from "./base.seletor";
+
+export class ImovelSeletor extends BaseSeletor{
   nome: string;
   tipo: number;
   capacidadePessoas: number;

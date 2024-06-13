@@ -5,6 +5,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      ...require('tailwindcss/colors'),
       'rentlaranja': '#ff914d',
       'rentazul': '#011e44',
       'rentbranco': '#ffffff',

@@ -8,7 +8,8 @@ module.exports = {
       'rentlaranja': '#ff914d',
       'rentazul': '#011e44',
       'rentbranco': '#ffffff',
-      'rentcinza': '#cccccc'
+      'rentcinza': '#cccccc',
+      'rentpreto': '#000000'
     },
     extend: {},
   },

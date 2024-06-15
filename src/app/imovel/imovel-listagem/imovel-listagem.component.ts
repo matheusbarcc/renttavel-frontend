@@ -4,6 +4,8 @@ import { ImovelService } from '../../shared/service/imovel.service';
 import { ImovelSeletor } from '../../shared/model/seletor/imovel.seletor';
 import { EnderecoService } from '../../shared/service/endereco.service';
 import { Endereco } from '../../shared/model/endereco';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-imovel-listagem',
@@ -21,7 +23,8 @@ export class ImovelListagemComponent implements OnInit{
   public offset: number;
 
   constructor(private imovelService: ImovelService,
-              private enderecoService: EnderecoService) { }
+              private enderecoService: EnderecoService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.pesquisar()
@@ -39,6 +42,35 @@ export class ImovelListagemComponent implements OnInit{
       }
     )
     this.contarPaginas()
+  }
+
+  alterar(imovelSelecionado: Imovel){
+    this.router.navigate(['/imovel/detalhe/'+ imovelSelecionado.id])
+  }
+
+  excluir(imovelSelecionado: Imovel){
+    Swal.fire({
+      title: 'Deseja realmente excluir esse imóvel?',
+      text: 'Essa ação não poderá ser desfeita!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      confirmButtonColor: "#ff914d",
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#cccccc',
+      focusCancel: true
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.imovelService.excluir(imovelSelecionado.id).subscribe(
+          resultado => {
+            this.pesquisar();
+          },
+          erro => {
+            Swal.fire('Erro ao excluir imóvel!', erro.error.mensagem, 'error')
+          }
+        );
+      }
+    })
   }
 
   limparSeletor(){

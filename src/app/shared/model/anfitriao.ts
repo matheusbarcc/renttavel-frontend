@@ -1,3 +1,3 @@
 export class Anfitriao {
-  id: number
+  id: number = 1
 }

@@ -151,7 +151,7 @@
       </div>
       <div class="text-rentazul text-xl">
         <div class="flex flex-col gap-y-3 text-rentazul">
-          <b><h3>Capacidade de pessoas</h3></b>
+          <b><label>Capacidade de pessoas</label></b>
           <div class="flex justify-start gap-x-2">
             <input type="radio" name="capacidadePessoas" [(ngModel)]="seletor.capacidadePessoas" value="1" class="hidden" id="capacidade1">
             <label for="capacidade1" class="form-control flex justify-center text-base flex-1 border px-1 py-3 items-center rounded-2xl hover:cursor-pointer select-none"
@@ -233,40 +233,20 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-2">
-        <div class="grid grid-cols-3 gap-x-5 text-rentazul text-xl">
-          <label for="qtdQuarto"><b>Quartos</b></label>
-          <label for="qtdCama"><b>Camas</b></label>
-          <label for="qtdBanheiro"><b>Banheiros</b></label>
-        </div>
-        <div class="form-group grid grid-cols-3 gap-x-5 text-rentazul text-xl">
-          <select class="form-control border border-rentcinza rounded-xl py-3 text-center text-base" name="qtdQuarto" [(ngModel)]="seletor.qtdQuarto">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-          </select>
-          <select class="form-control border border-rentcinza rounded-xl py-3 text-center text-base" name="qtdCama" [(ngModel)]="seletor.qtdCama">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-          </select>
-          <select class="form-control border border-rentcinza rounded-xl py-3 text-center text-base" name="qtdBanheiro" [(ngModel)]="seletor.qtdBanheiro">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-          </select>
+      <div class="flex flex-col">
+        <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl">
+          <div class="flex flex-col gap-y-3">
+            <label class="truncate" for="isOcupado"><b>Quartos</b></label>
+            <input [(ngModel)]="seletor.qtdQuarto" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+          </div>
+          <div class="flex flex-col gap-y-3">
+            <label class="truncate" for="isOcupado"><b>Camas</b></label>
+            <input [(ngModel)]="seletor.qtdCama" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+          </div>
+          <div class="flex flex-col gap-y-3">
+            <label class="truncate" for="isOcupado"><b>Banheiros</b></label>
+            <input [(ngModel)]="seletor.qtdBanheiro" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+          </div>
         </div>
       </div>
       <div class="flex flex-col gap-5">

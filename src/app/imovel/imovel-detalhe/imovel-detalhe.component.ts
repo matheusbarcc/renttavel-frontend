@@ -64,7 +64,7 @@ export class ImovelDetalheComponent implements OnInit{
       erro => {
           Swal.fire({
             title: "Erro ao salvar imóvel",
-            text: erro.error.mensagem,
+            html: erro.error.mensagem,
             icon: "error",
             showConfirmButton: true,
             confirmButtonColor: "#ff914d"
@@ -88,7 +88,7 @@ export class ImovelDetalheComponent implements OnInit{
       erro => {
         Swal.fire({
           title: "Erro ao editar imóvel",
-          text: erro.error.mensagem,
+          html: erro.error.mensagem,
           icon: "error",
           showConfirmButton: true,
           confirmButtonColor: "#ff914d"

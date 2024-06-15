@@ -1,0 +1,123 @@
+<div class="flex flex-col gap-11">
+
+  <div class="flex items-center justify-between space-x-2 flex-start pt-10 px-32">
+    <h1 class="flex items-center gap-5 text-rentazul">
+      <b><span class="text-5xl">Imóveis</span></b>
+      <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png" alt="forward--v1"/>
+      <span class="text-4xl" *ngIf="idImovel == null">Cadastro</span>
+      <span class="text-4xl" *ngIf="idImovel > 0">Edição</span>
+    </h1>
+    <img src="https://i.imgur.com/brCEmd5.png" alt="Logo Renttavel" class="w-72 h-16">
+  </div>
+
+  <div class="flex items-center justify-center">
+    <div class="bg-rentbranco flex flex-col border border-rentcinza w-5/12 rounded-3xl shadow-lg">
+      <div class="flex flex-col px-10 py-5 gap-5">
+        <div class="flex flex-col gap-y-3 text-rentazul">
+          <div class="flex flex-col gap-y-3">
+            <label class="text-xl" for="Nome"><b>Nome</b></label>
+            <input [(ngModel)]="imovel.nome" class="form-control border border-rentcinza rounded-xl py-3 px-3 text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="text" name="Nome" placeholder="Casa na Árvore...">
+          </div>
+        </div>
+        <div class="flex flex-col gap-y-3 text-rentazul">
+          <b><label class="text-xl">Tipo do imóvel</label></b>
+          <div class="flex justify-start gap-x-5">
+            <input type="radio" name="tipo" [(ngModel)]="imovel.tipo" value=1 class="hidden" id="tipoCasa">
+            <label for="tipoCasa" class="form-control flex flex-col border flex-1 px-4 py-3 gap-y-6 rounded-2xl hover:cursor-pointer select-none"
+                                  [ngClass]="{
+                                    'border-rentazul': imovel.tipo == 1,
+                                    'shadow-lg': imovel.tipo == 1,
+                                    'ring-rentazul': imovel.tipo == 1,
+                                    'ring-2': imovel.tipo == 1,
+                                    'border-rentcinza': imovel.tipo != 1,
+                                    }">
+              <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/home--v1.png" alt="home--v1"/>
+              <span class="ml-1 text-lg">Casa</span>
+            </label>
+            <input type="radio" name="tipo" [(ngModel)]="imovel.tipo" value="2" class="hidden" id="tipoApartamento">
+            <label for="tipoApartamento" class="form-control flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-6 rounded-2xl hover:cursor-pointer select-none"
+                                          [ngClass]="{
+                                            'border-rentazul': imovel.tipo == 2,
+                                            'shadow-md': imovel.tipo == 2,
+                                            'ring-rentazul': imovel.tipo == 2,
+                                            'ring-2': imovel.tipo == 2,
+                                            'border-rentcinza': imovel.tipo != 2,
+                                            }">
+              <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/apartment.png" alt="apartment"/>
+              <span class="ml-1 text-lg">Apartamento</span>
+            </label>
+            <input type="radio" name="tipo" [(ngModel)]="imovel.tipo" value="3" class="hidden" id="tipoUnidadeSecundaria">
+            <label for="tipoUnidadeSecundaria" class="form-control flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-2 rounded-2xl hover:cursor-pointer select-none"
+                                                [ngClass]="{
+                                                  'border-rentazul': imovel.tipo == 3,
+                                                  'shadow-md': imovel.tipo == 3,
+                                                  'ring-rentazul': imovel.tipo == 3,
+                                                  'ring-2': imovel.tipo == 3,
+                                                  'border-rentcinza': imovel.tipo != 3,
+                                                  }">
+              <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/real-estate.png" alt="real-estate"/>
+              <div>
+                <span class="flex ml-1 items-start text-base">Unidade</span>
+                <span class="ml-1 text-base">Secundária</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl">
+            <div class="flex flex-col gap-y-3">
+              <label class="truncate" for="isOcupado"><b>Quartos</b></label>
+              <input [(ngModel)]="imovel.qtdQuarto" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label class="truncate" for="isOcupado"><b>Camas</b></label>
+              <input [(ngModel)]="imovel.qtdCama" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label class="truncate" for="isOcupado"><b>Banheiros</b></label>
+              <input [(ngModel)]="imovel.qtdBanheiro" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+            <div class="flex flex-col gap-y-3">
+              <label class="truncate" for="isOcupado"><b>Capacidade de pessoas</b></label>
+              <input [(ngModel)]="imovel.capacidadePessoas" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number">
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label class="text-xl" for="Endereco"><b>Endereço</b></label>
+              <select class="border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" name="Endereco" [compareWith]="compareById" [(ngModel)]="imovel.endereco">
+                @for (e of enderecos; track e.id){
+                  <option [ngValue]="e">
+                    {{ e.rua }} - {{ e.numero }}
+                  </option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-y-3 text-rentazul">
+          <div class="flex flex-col gap-y-3">
+            <label class="text-xl" for="Descricao"><b>Descrição</b></label>
+            <textarea [(ngModel)]="imovel.descricao" class="form-control border border-rentcinza rounded-xl p-3 text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg"
+                       name="Descricao" placeholder="Uma bela casa na árvore com uma vista incrível..." rows="3"></textarea>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <button class="flex items-center gap-2 border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="voltar()">
+            <img width="25" height="25" src="https://img.icons8.com/fluency-systems-filled/25/ff914d/long-arrow-left.png" alt="long-arrow-left"/>
+            <span class="text-xl font-bold">Voltar</span>
+          </button>
+          <button class="flex items-center gap-3 bg-rentlaranja text-lg py-3 px-8 rounded-xl text-rentbranco font-semibold shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="salvar()">
+            <span class="text-xl font-bold" *ngIf="idImovel == null">Cadastrar</span>
+            <span class="text-xl font-bold" *ngIf="idImovel > 0">Editar</span>
+            <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/25/FFFFFF/checkmark--v1.png" alt="checkmark--v1" *ngIf="idImovel == null"/>
+            <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png" alt="edit--v1" *ngIf="idImovel > 0"/>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

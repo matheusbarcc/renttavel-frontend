@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Imovel } from '../../shared/model/imovel';
 import { ImovelService } from '../../shared/service/imovel.service';
 import { EnderecoService } from '../../shared/service/endereco.service';
@@ -24,7 +24,8 @@ export class ImovelDetalheComponent implements OnInit{
   constructor(private imovelService: ImovelService,
               private enderecoService: EnderecoService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.consultarTodosEnderecos();
@@ -41,12 +42,12 @@ export class ImovelDetalheComponent implements OnInit{
     })
   }
 
-  salvar(): void{
-    if(this.idImovel){
-      this.alterar();
-    }else{
-      this.inserir();
-    }
+  salvar(): void {
+      if (this.idImovel) {
+        this.alterar();
+      } else {
+        this.inserir();
+      }
   }
 
   inserir(){

@@ -12,7 +12,11 @@ module.exports = {
       'rentcinza': '#cccccc',
       'rentpreto': '#000000'
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        'custom-direction': '2px 0px 10px rgba(0, 0, 0, 0.2)', // Adjust the values as needed
+      },
+    },
   },
   plugins: [],
 }

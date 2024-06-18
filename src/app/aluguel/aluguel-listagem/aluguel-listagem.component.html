@@ -1,7 +1,7 @@
-<div class="flex flex-col gap-8 ">
+<div class="flex flex-col gap-6 ">
 
   <!-- Titulo e Logo -->
-    <div class="flex items-center justify-between space-x-2 flex-start pt-10 px-32">
+    <div class="flex items-center justify-between flex-start pt-10 px-32">
       <h1 class="flex items-center gap-5 text-rentazul">
         <b><span class="text-5xl">Aluguel</span></b>
         <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png" alt="forward--v1"/>
@@ -12,16 +12,40 @@
 
   <!-- Barra de busca e Filtros -->
     <div class="flex items-center justify-center">
-      <div class="flex items-center border border-rentcinza w-4/12 pl-8 pr-2 rounded-full gap-x-4 shadow-md">
-        <input class="form-control w-7/12 h-10 text-lg focus:outline-none my-2" type="text" placeholder="Nome">
+      <div class="flex items-center border border-rentcinza w-5/12 pl-8 pr-2 py-2 rounded-full gap-x-5 shadow-md">
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+          <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/cccccc/us-dollar-circled--v2.png" alt="us-dollar-circled--v2"/>
+           &nbsp;Valor
+        </button>
         <div class="w-px h-9 bg-rentcinza"></div>
-        <button class="flex items-center justify-center w-3/12 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+          <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/25/cccccc/enter-2.png" alt="enter-2"/>
+           &nbsp;Checkin
+        </button>
+        <div class="w-px h-9 bg-rentcinza"></div>
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+          <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/25/cccccc/exit.png" alt="exit"/>
+           &nbsp;Chekout
+        </button>
+        <div class="w-px h-9 bg-rentcinza"></div>
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
           <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/cccccc/sorting-options.png" alt="sorting-options"/>
            &nbsp;Filtros
         </button>
         <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg">
           <img width="25" height="25" src="https://img.icons8.com/sf-black/25/FFFFFF/search.png" alt="search"/>
         </button>
+      </div>
+    </div>
+
+    <div class="flex justify-center items-center">
+      <div id="dropdownMenu" class="absolute top-44 z-20 w-48 bg-white border border-rentcinza rounded-lg shadow-lg">
+        <div class="flex flex-col justify-center items-center p-5 gap-y-2">
+          <label for="min-value" class="block mb-2 text-sm font-medium text-gray-900">Valor Mínimo</label>
+          <input type="number" class=" bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange">
+          <label for="max-value" class="block mb-2 text-sm font-medium text-gray-900">Valor Máximo</label>
+          <input id="max-value" type="range" value="1000" min="0" max="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange">
+        </div>
       </div>
     </div>
 
@@ -47,11 +71,72 @@
     </div>
 
 <!-- Alugueis -->
-    <div *ngFor="let aluguel of alugueis" >
-      <div class="flex border justify-center">
-        <div class="w-1/3">
-          {{ aluguel.qtdDias }}
+  <div class="flex flex-col items-center justify-center gap-5">
+    <div class="flex justify-evenly py-10 w-2/3 bg-rentbranco border border-rentcinza rounded-2xl shadow-lg text-rentazul" *ngFor="let a of alugueis">
+      <div class="flex flex-col gap-y-4">
+        <h2 class="text-3xl font-bold">Data</h2>
+        <div>
+          <label class="text-xl font-bold">Checkin</label>
+          <p>{{ a.dataCheckin | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+        </div>
+        <div>
+          <label class="text-xl font-bold">Checkout Previsto</label>
+          <p>{{ a.dataCheckoutPrevisto | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+        </div>
+        <div>
+          <label class="text-xl font-bold">Checkout Efetivo</label>
+          <p>{{ a.dataCheckoutEfetivo | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
         </div>
       </div>
+      <div class="w-px h-64 bg-rentcinza"></div>
+      <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+        <div class="col-span-2">
+          <h2 class="text-3xl font-bold">Valor</h2>
+        </div>
+        <div class="">
+          <label class="text-xl font-bold">Diária</label>
+          <p>R$ {{ a.valorDiaria }}</p>
+        </div>
+        <div class="text-end">
+          <label class="text-xl font-bold">Dias</label>
+          <p>{{ a.qtdDias }} dias</p>
+        </div>
+        <div>
+          <label class="text-xl font-bold">Limpeza</label>
+          <p>R$ {{ a.valorLimpeza }}</p>
+        </div>
+        <div class="text-end">
+          <label class="text-xl font-bold">Multa</label>
+          <p>R$ {{ a.valorMulta }}</p>
+        </div>
+        <div class="col-span-2 border-2 border-rentlaranja rounded-md px-4 py-2">
+          <label class="text-xl font-bold">Valor total</label>
+          <p>R$ {{ a.valorTotal }}</p>
+        </div>
+      </div>
+      <div class="w-px h-64 bg-rentcinza"></div>
+      <div class="flex flex-col w-2/12">
+        <h2 class="text-3xl font-bold">Outros</h2>
+        <div class="flex flex-col my-5 gap-y-5">
+          <button class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50" (click)="alterar(a.imovel)" >
+            <label class="text-xl font-bold">Imóvel</label>
+            <p class="truncate w-11/12">{{ a.imovel.nome }}</p>
+          </button>
+          <button class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50" >
+            <label class="text-xl font-bold">Inquilino</label>
+            <p class="truncate">{{ a.inquilino.id }}</p>
+          </button>
+        </div>
+      </div>
+      <div class="w-px h-64 bg-rentcinza"></div>
+      <div class="flex flex-col justify-center gap-y-3">
+        <button class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-6 py-4 rounded-xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg">
+          <b>Editar</b> <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png" alt="edit--v1"/>
+        </button>
+        <button class="flex items-center justify-center gap-2 text-lg bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-5 py-3 rounded-xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg">
+          <b>Excluir</b> <img width="33" height="33" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
+        </button>
+      </div>
     </div>
+  </div>
 </div>

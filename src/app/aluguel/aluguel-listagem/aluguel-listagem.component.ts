@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AluguelService } from '../../shared/service/aluguel.service';
 import { Aluguel } from '../../shared/model/aluguel';
 import { AluguelSeletor } from '../../shared/model/seletor/aluguel.seletor';
+import { Imovel } from '../../shared/model/imovel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aluguel-listagem',
@@ -17,7 +19,8 @@ export class AluguelListagemComponent implements OnInit{
   public totalRegistros: number;
   public offset: number;
 
-  constructor(private aluguelService: AluguelService){}
+  constructor(private aluguelService: AluguelService,
+              private router: Router){}
 
   ngOnInit(): void {
     this.consultarTodos();
@@ -32,5 +35,9 @@ export class AluguelListagemComponent implements OnInit{
         console.log('Erro ao buscar alugueis ' + erro)
       }
     )
+  }
+
+  alterar(imovelSelecionado: Imovel){
+    this.router.navigate(['/imovel/detalhe/'+ imovelSelecionado.id])
   }
 }

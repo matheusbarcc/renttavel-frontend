@@ -6,7 +6,7 @@ export class Endereco{
   bairro: string
   cidade: string
   estado: string
-  pais: string
+  pais: string="BR"
 }
 
 

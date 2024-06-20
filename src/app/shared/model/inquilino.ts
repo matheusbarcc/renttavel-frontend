@@ -1,3 +1,6 @@
 export class Inquilino{
-  id: number
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
 }

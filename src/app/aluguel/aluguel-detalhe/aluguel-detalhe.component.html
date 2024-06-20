@@ -1,4 +1,3 @@
-<!-- <pre>{{aluguel|json}}</pre> -->
 <div class="flex flex-col gap-11">
 
   <div class="flex items-center justify-between space-x-2 flex-start pt-10 px-32">
@@ -58,11 +57,7 @@
                 </div>
                 <div class="flex flex-col gap-y-2">
                   <label class="truncate" for="valorMulta"><b>Multa</b></label>
-                  <input [(ngModel)]="aluguel.valorMulta" name="valorMulta" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="R$ 0,00" required (blur)="calcularValorTotal()"
-                  [ngClass]="{
-                    'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.valorMulta
-                  }">
-                  <div *ngIf="form.submitted && !aluguel.valorMulta"  class="text-red-600 text-sm">Campo obrigatório.</div>
+                  <input [(ngModel)]="aluguel.valorMulta" name="valorMulta" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="R$ 0,00" required (blur)="calcularValorTotal()">
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
@@ -82,20 +77,22 @@
               <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
                 <div class="flex flex-col gap-y-2">
                   <label class="truncate" for="imovel"><b>Imóvel</b></label>
-                  <select [(ngModel)]="aluguel.imovel" name="imovel" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" required
-                  [ngClass]="{
-                    'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.imovel
-                  }">
-                    <option *ngFor="let imovel of imoveis" [ngValue]="imovel">{{ imovel.nome }}</option>
+                  <select [compareWith]="compareById" [(ngModel)]="aluguel.imovel" name="imovel" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" required
+                          [ngClass]="{
+                            'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.imovel
+                          }">
+                    @for(i of imoveis; track i.id){
+                      <option [ngValue]="i">{{ i.nome }}</option>
+                    }
                   </select>
                   <div *ngIf="form.submitted && !aluguel.imovel"  class="text-red-600 text-sm">Campo obrigatório.</div>
                 </div>
                 <div class="flex flex-col gap-y-2">
                   <label class="truncate" for="inquilino"><b>Inquilino</b></label>
                   <select [compareWith]="compareById" [(ngModel)]="aluguel.inquilino" name="inquilino" class="form-control border border-rentcinza rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" required
-                  [ngClass]="{
-                    'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.inquilino
-                  }">
+                          [ngClass]="{
+                            'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.inquilino
+                          }">
                     @for(inq of inquilinos; track inq.id){
                       <option [ngValue]="inq">{{ inq.nome }}</option>
                     }

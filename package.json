@@ -25,6 +25,7 @@
     "@ng-icons/heroicons": "^28.0.0",
     "bootstrap-icons": "^1.11.3",
     "express": "^4.18.2",
+    "flowbite-datepicker": "^1.2.7",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.11.1",
     "tslib": "^2.3.0",

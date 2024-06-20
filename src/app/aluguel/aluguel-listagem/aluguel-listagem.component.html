@@ -13,70 +13,114 @@
   <!-- Barra de busca e Filtros -->
     <div class="flex items-center justify-center">
       <div class="flex items-center border border-rentcinza w-5/12 pl-8 pr-2 py-2 rounded-full gap-x-5 shadow-md">
-        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20" (click)="toggleFiltroValor()" (click)="closeFiltroCheckin()" (click)="closeFiltroCheckout()">
           <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/cccccc/us-dollar-circled--v2.png" alt="us-dollar-circled--v2"/>
            &nbsp;Valor
         </button>
         <div class="w-px h-9 bg-rentcinza"></div>
-        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+        <button class="flex items-center justify-center w-3/12 gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20" (click)="toggleFiltroCheckin()" (click)="closeFiltroValor()" (click)="closeFiltroCheckout()">
           <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/25/cccccc/enter-2.png" alt="enter-2"/>
-           &nbsp;Checkin
+           &nbsp;Check-in
         </button>
         <div class="w-px h-9 bg-rentcinza"></div>
-        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20" (click)="toggleFiltroCheckout()" (click)="closeFiltroValor()" (click)="closeFiltroCheckin()">
           <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/25/cccccc/exit.png" alt="exit"/>
-           &nbsp;Chekout
+           &nbsp;Checkout
         </button>
         <div class="w-px h-9 bg-rentcinza"></div>
-        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+        <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20" (click)="openModalFiltros()" (click)="closeFiltroValor()" (click)="closeFiltroCheckin()" (click)="closeFiltroCheckout()">
           <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/cccccc/sorting-options.png" alt="sorting-options"/>
            &nbsp;Filtros
         </button>
-        <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg">
+        <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="pesquisar()">
           <img width="25" height="25" src="https://img.icons8.com/sf-black/25/FFFFFF/search.png" alt="search"/>
         </button>
       </div>
     </div>
 
-    <div class="flex justify-center items-center">
-      <div id="dropdownMenu" class="absolute top-44 z-20 w-48 bg-white border border-rentcinza rounded-lg shadow-lg">
-        <div class="flex flex-col justify-center items-center p-5 gap-y-2">
-          <label for="min-value" class="block mb-2 text-sm font-medium text-gray-900">Valor Mínimo</label>
-          <input type="number" class=" bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange">
-          <label for="max-value" class="block mb-2 text-sm font-medium text-gray-900">Valor Máximo</label>
-          <input id="max-value" type="range" value="1000" min="0" max="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-orange">
+    <div *ngIf="isModalCheckoutOpen"  class="absolute z-21 w-40">
+      <div id="dropdownCheckout" class="absolute top-48 z-20 w-52 bg-white border border-rentcinza rounded-lg shadow-lg">
+        <div class="flex flex-col p-5 gap-y-1 text-rentazul">
+          <label for="min-value" class="block mb-1 text-md font-bold">Data de Checkout</label>
+          <div class="flex items-center gap-1">
+            <input [(ngModel)]="seletor.dataCheckoutEfetivoInicio" type="datetime-local" class="text-sm p-2 border rounded-md w-11/12">
+            <button (click)="limparSeletorCheckoutInicio()">
+              <img width="25" height="25" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isModalCheckinOpen"  class="absolute z-21 w-40">
+      <div id="dropdownCheckin" class="absolute top-48 z-20 w-52 bg-white border border-rentcinza rounded-lg shadow-lg">
+        <div class="flex flex-col p-5 gap-y-1 text-rentazul">
+          <label for="min-value" class="block mb-1 text-md font-bold">Data de Check-in</label>
+          <div class="flex items-center gap-1">
+            <input [(ngModel)]="seletor.dataCheckinInicio" type="datetime-local" class="text-sm p-2 border rounded-md w-11/12">
+            <button (click)="limparSeletorCheckinInicio()">
+              <img width="25" height="25" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isModalValorOpen"  class="absolute z-20">
+      <div id="dropdownValor" class="absolute top-48 z-20 w-52 bg-white border border-rentcinza rounded-lg shadow-lg">
+        <div class="flex flex-col justify-center items-center p-5 gap-y-4 text-rentazul">
+          <div>
+            <label for="min-value" class="block mb-1 text-md font-bold">Mínimo</label>
+            <div class="flex items-center gap-1">
+              <span class="mr-2 text-sm text-rentcinza select-none">R$</span>
+              <input [(ngModel)]="seletor.valorTotalMin" placeholder="0,00" type="number" class="border text-sm w-8/12 h-1/2 rounded-md text-center p-1 focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg">
+              <button (click)="limparSeletorValorMin()">
+                <img width="25" height="25" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label for="min-value" class="block mb-1 text-md font-bold">Máximo</label>
+            <div class="flex items-center gap-1">
+              <span class="mr-2 text-sm text-rentcinza select-none">R$</span>
+              <input [(ngModel)]="seletor.valorTotalMax" min="0" placeholder="99999,99" type="number" class="border text-sm w-8/12 h-1/2 rounded-md text-center p-1 focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg">
+              <button (click)="limparSeletorValorMax()">
+                <img width="25" height="25" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
   <!-- Paginacao -->
-    <div class="flex justify-start ml-48 gap-2 items-center">
-      <label class="text-rentazul select-none" for="limitePg">Itens por página: </label>
-        <select class="text-rentazul rounded border border-rentcinza p-2 hover:outline-none select-none" name="limitePg" [(ngModel)]="seletor.limite">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="4">4</option>
-          <option value="8">8</option>
-          <option value="12">12</option>
-        </select>
-      <span class="flex items-center justify-center text-rentazul w-32 select-none">{{(seletor.limite * (seletor.pagina - 1)) + 1}} - {{seletor.limite * seletor.pagina}} de {{ totalRegistros }}</span>
-      <div class="flex items-center gap-7">
-        <button class="disabled:opacity-30 select-none" id="btnPaginacao" id="navPaginacao" [disabled]="seletor.pagina == 1">
-          <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/back.png" alt="back"/>
-        </button>
-        <button class="disabled:opacity-30 select-none" id="btnPaginacao" id="navPaginacao" [disabled]="seletor.pagina == totalPaginas">
-          <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/forward--v1.png" alt="forward--v1"/>
-        </button>
-      </div>
+  <div class="flex justify-start ml-48 gap-2 items-center">
+    <label class="text-rentazul select-none" for="limitePg">Itens por página: </label>
+      <select class="text-rentazul rounded border border-rentcinza p-2 hover:outline-none select-none" name="limitePg" [(ngModel)]="seletor.limite" (change)="pesquisar()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="12">12</option>
+      </select>
+    <span class="flex items-center justify-center text-rentazul w-32 select-none">{{(seletor.limite * (seletor.pagina - 1)) + 1}} - {{seletor.limite * seletor.pagina}} de {{ totalRegistros }}</span>
+    <div class="flex items-center gap-7">
+      <button class="disabled:opacity-30 select-none" id="btnPaginacao" id="navPaginacao" (click)="voltarPg()" [disabled]="seletor.pagina == 1">
+        <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/back.png" alt="back"/>
+      </button>
+      <button class="disabled:opacity-30 select-none" id="btnPaginacao" id="navPaginacao" (click)="proximaPg()" [disabled]="seletor.pagina == totalPaginas">
+        <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/forward--v1.png" alt="forward--v1"/>
+      </button>
     </div>
+  </div>
 
 <!-- Alugueis -->
-  <div class="flex flex-col items-center justify-center gap-5">
+  <div class="flex flex-col items-center justify-center gap-5 mb-5">
     <div class="flex justify-evenly py-10 w-2/3 bg-rentbranco border border-rentcinza rounded-2xl shadow-lg text-rentazul" *ngFor="let a of alugueis">
       <div class="flex flex-col gap-y-4">
         <h2 class="text-3xl font-bold">Data</h2>
         <div>
-          <label class="text-xl font-bold">Checkin</label>
+          <label class="text-xl font-bold">Check-in</label>
           <p>{{ a.dataCheckin | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
         </div>
         <div>
@@ -118,25 +162,101 @@
       <div class="flex flex-col w-2/12">
         <h2 class="text-3xl font-bold">Outros</h2>
         <div class="flex flex-col my-5 gap-y-5">
-          <button class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50" (click)="alterar(a.imovel)" >
+          <button class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50" (click)="alterarImovel(a.imovel)" >
             <label class="text-xl font-bold">Imóvel</label>
             <p class="truncate w-11/12">{{ a.imovel.nome }}</p>
           </button>
           <button class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50" >
             <label class="text-xl font-bold">Inquilino</label>
-            <p class="truncate">{{ a.inquilino.id }}</p>
+            <p class="truncate">{{ a.inquilino.nome }}</p>
           </button>
         </div>
       </div>
       <div class="w-px h-64 bg-rentcinza"></div>
       <div class="flex flex-col justify-center gap-y-3">
-        <button class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-6 py-4 rounded-xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg">
+        <button class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-6 py-4 rounded-xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="alterar(a)">
           <b>Editar</b> <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png" alt="edit--v1"/>
         </button>
-        <button class="flex items-center justify-center gap-2 text-lg bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-5 py-3 rounded-xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg">
+        <button class="flex items-center justify-center gap-2 text-lg bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-5 py-3 rounded-xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="excluir(a)">
           <b>Excluir</b> <img width="33" height="33" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
         </button>
       </div>
     </div>
   </div>
+
+  <div *ngIf="isModalFiltrosOpen"  class="modal-overlay fixed inset-0 flex items-center justify-center bg-rentpreto bg-opacity-50 backdrop-filter ml-64">
+    <div class="modal-content bg-rentbranco flex flex-col border border-rentcinza w-5/12 rounded-3xl">
+      <div class="flex justify-between items-center py-3 px-8">
+        <button (click)="closeModalFiltros()">
+          <img width="20" height="20" src="https://img.icons8.com/ios/25/021e43/delete-sign--v1.png" alt="delete-sign--v1"/>
+        </button>
+        <h2 class="flex-1 text-center text-rentazul text-2xl"><b>Filtros</b></h2>
+      </div>
+      <hr class="w-full border-rentcinza">
+      <div class="flex flex-col px-10 py-5 gap-5">
+        <div class="flex flex-col gap-5">
+          <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+            <div class="flex flex-col gap-y-3">
+              <label for="checkinInicio"><b>Check-in Inicial</b></label>
+              <input [(ngModel)]="seletor.dataCheckinInicio" type="datetime-local" name="checkinInicio" class="text-sm p-3 border border-rentcinza rounded-md">
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label for="checkinFinal"><b>Check-in Final</b></label>
+              <input [(ngModel)]="seletor.dataCheckinFinal" type="datetime-local" name="checkinFinal" class="text-sm p-3 border border-rentcinza rounded-md">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+            <div class="flex flex-col gap-y-3">
+              <label for="checkoutInicio"><b>Checkout Inicial</b></label>
+              <input [(ngModel)]="seletor.dataCheckoutEfetivoInicio" type="datetime-local" name="checkoutInicio" class="text-sm p-3 border border-rentcinza rounded-md">
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label for="checkoutFinal"><b>Checkout Final</b></label>
+              <input [(ngModel)]="seletor.dataCheckoutEfetivoFinal" type="datetime-local" name="checkoutFinal" class="text-sm p-3 border border-rentcinza rounded-md">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+            <div class="flex flex-col gap-y-3">
+              <label for="qtdDiasInicio"><b>Dias Inicial</b></label>
+              <input type="number" [(ngModel)]="seletor.qtdDiasMin" class="text-sm p-3 border border-rentcinza rounded-md">
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label for="qtdDiasFinal"><b>Dias Final</b></label>
+              <input type="number" [(ngModel)]="seletor.qtdDiasMax" type="number" name="qtdDiasFinal" class="text-sm p-3 border border-rentcinza rounded-md">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+            <div class="flex flex-col gap-y-3">
+              <label for="imovel"><b>Imóvel</b></label>
+              <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="imovel" [(ngModel)]="seletor.idImovel">
+                @for (i of imoveis; track i.id){
+                  <option value="{{ i.id }}">
+                    {{i.nome}}
+                  </option>
+                }
+              </select>
+            </div>
+            <div class="flex flex-col gap-y-3">
+              <label for="inquilino"><b>Inquilinos</b></label>
+              <select class="border border-rentcinza rounded-xl py-3 text-center text-base" name="inquilino" [(ngModel)]="seletor.idInquilino">
+                @for (inq of inquilinos; track inq.id){
+                  <option value="{{ inq.id }}">
+                    {{inq.nome}}
+                  </option>
+                }
+              </select>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <button class="border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="limparSeletor()">
+              <p>Limpar filtros</p>
+            </button>
+            <button class="flex items-center gap-4 bg-rentlaranja text-xl py-3 px-8 rounded-xl text-rentbranco font-bold shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="pesquisar()" (click)="closeModalFiltros()">
+              <p>Filtrar</p>
+              <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/sorting-options.png" alt="sorting-options"/>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

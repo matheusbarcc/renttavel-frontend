@@ -1,14 +1,14 @@
 import { BaseSeletor } from "./base.seletor";
 
 export class AluguelSeletor extends BaseSeletor {
-  dataCheckinInicio: Date;
+  dataCheckinInicio?: Date;
   dataCheckinFinal: Date;
   dataCheckoutPrevistoInicio: Date;
   dataCheckoutPrevistoFinal: Date;
-  dataCheckoutEfetivoInicio: Date;
+  dataCheckoutEfetivoInicio?: Date;
   dataCheckoutEfetivoFinal: Date;
-  valorTotalMin: number;
-  valorTotalMax: number;
+  valorTotalMin?: number;
+  valorTotalMax?: number;
   valorDiariaMin: number;
   valorDiariaMax: number;
   valorLimpezaMin: number;

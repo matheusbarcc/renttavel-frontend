@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AluguelService } from './../../shared/service/aluguel.service';
 import { ImovelService } from './../../shared/service/imovel.service';

@@ -99,8 +99,8 @@ export class AluguelListagemComponent implements OnInit{
     this.seletor.dataCheckinInicio = undefined;
   }
 
-  limparSeletorCheckoutInicio(){
-    this.seletor.dataCheckoutEfetivoInicio = undefined;
+  limparSeletorCheckoutFinal(){
+    this.seletor.dataCheckoutEfetivoFinal = undefined;
   }
 
   contarRegistros(){

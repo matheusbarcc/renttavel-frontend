@@ -12,7 +12,7 @@
 
 <!-- Barra de busca e Filtros -->
   <div class="flex items-center justify-center">
-    <div class="flex items-center border border-rentcinza w-4/12 pl-8 pr-2 rounded-full gap-x-4 shadow-md">
+    <div class="flex items-center border border-rentcinza w-4/12 pl-8 pr-2 rounded-full gap-x-5 shadow-md">
       <input class="form-control w-7/12 h-10 text-lg focus:outline-none my-2" type="text" placeholder="Nome" [(ngModel)]="seletor.nome" (keyup.enter)="pesquisar()">
       <div class="w-px h-9 bg-rentcinza"></div>
       <button (click)="abrirFiltros()" class="flex items-center justify-center w-3/12 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
@@ -149,7 +149,7 @@
       </div>
       <div class="text-rentazul text-xl">
         <div class="flex flex-col gap-y-3 text-rentazul">
-          <b><label>Capacidade de pessoas</label></b>
+          <b><label>Capacidade de máxima</label></b>
           <div class="flex justify-start gap-x-2">
             <input type="radio" name="capacidadePessoas" [(ngModel)]="seletor.capacidadePessoas" value="1" class="hidden" id="capacidade1">
             <label for="capacidade1" class="form-control flex justify-center text-base flex-1 border px-1 py-3 items-center rounded-2xl hover:cursor-pointer select-none"

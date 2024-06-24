@@ -34,6 +34,18 @@ export class AluguelDetalheComponent implements OnInit {
     this.consultarTodosInquilinos();
   }
 
+  calculateQtdDias(): void {
+    if (this.aluguel.dataCheckin && this.aluguel.dataCheckoutPrevisto) {
+      const checkinDate = new Date(this.aluguel.dataCheckin);
+      const checkoutDate = new Date(this.aluguel.dataCheckoutPrevisto);
+      const timeDifference = checkoutDate.getTime() - checkinDate.getTime();
+      const dayDifference = timeDifference / (1000 * 3600 * 24);
+      this.aluguel.qtdDias = Math.round(dayDifference);
+    } else {
+      this.aluguel.qtdDias = 0;
+    }
+  }
+
   verificarId() {
     this.route.params.subscribe((params) => {
       this.idAluguel = params['id'];
@@ -109,18 +121,10 @@ export class AluguelDetalheComponent implements OnInit {
   }
 
   calcularValorTotal(){
-    this.aluguel.valorTotal = (this.aluguel.valorDiaria * this.aluguel.qtdDias) + this.aluguel.valorLimpeza + this.aluguel.valorMulta
-  }
-
-  calcularDias(){
-    if (this.aluguel.dataCheckoutPrevisto && this.aluguel.dataCheckin) {
-      const diferencaMilissegundos = this.aluguel.dataCheckoutPrevisto.getTime() - this.aluguel.dataCheckin.getTime();
-
-      // Converte milissegundos para dias
-      const diferencaDias = Math.ceil(diferencaMilissegundos / (1000 * 60 * 60 * 24));
-
-      // Atribui a diferença em dias para this.aluguel.qtdDias
-      this.aluguel.qtdDias = diferencaDias;
+    if(!this.aluguel.valorMulta) {
+      this.aluguel.valorTotal = (this.aluguel.valorDiaria * this.aluguel.qtdDias) + this.aluguel.valorLimpeza
+    } else {
+      this.aluguel.valorTotal = (this.aluguel.valorDiaria * this.aluguel.qtdDias) + this.aluguel.valorLimpeza + this.aluguel.valorMulta
     }
   }
 

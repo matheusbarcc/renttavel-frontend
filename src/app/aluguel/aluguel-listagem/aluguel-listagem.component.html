@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-6 ">
+<div class="flex flex-col gap-8 ">
 
   <!-- Titulo e Logo -->
     <div class="flex items-center justify-between flex-start pt-10 px-32">
@@ -12,7 +12,7 @@
 
   <!-- Barra de busca e Filtros -->
     <div class="flex items-center justify-center">
-      <div class="flex items-center border border-rentcinza w-5/12 pl-8 pr-2 py-2 rounded-full gap-x-5 shadow-md">
+      <div class="flex items-center border border-rentcinza w-5/12 pl-8 pr-2 py-2 rounded-full gap-x-4 shadow-md">
         <button class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20" (click)="toggleFiltroValor()" (click)="closeFiltroCheckin()" (click)="closeFiltroCheckout()">
           <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/cccccc/us-dollar-circled--v2.png" alt="us-dollar-circled--v2"/>
            &nbsp;Valor
@@ -38,13 +38,13 @@
       </div>
     </div>
 
-    <div *ngIf="isModalCheckoutOpen"  class="absolute z-21 w-40">
-      <div id="dropdownCheckout" class="absolute top-48 z-20 w-52 bg-white border border-rentcinza rounded-lg shadow-lg">
+    <div *ngIf="isModalCheckoutOpen"  class="absolute z-21">
+      <div id="dropdownCheckout" class="absolute top-48 z-20 w-72 bg-white border border-rentcinza rounded-lg shadow-lg">
         <div class="flex flex-col p-5 gap-y-1 text-rentazul">
           <label for="min-value" class="block mb-1 text-md font-bold">Data de Checkout</label>
           <div class="flex items-center gap-1">
-            <input [(ngModel)]="seletor.dataCheckoutEfetivoInicio" type="datetime-local" class="text-sm p-2 border rounded-md w-11/12">
-            <button (click)="limparSeletorCheckoutInicio()">
+            <input [(ngModel)]="seletor.dataCheckoutEfetivoFinal" type="datetime-local" class="text-sm p-2 border rounded-md w-11/12">
+            <button (click)="limparSeletorCheckoutFinal()">
               <img width="25" height="25" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
             </button>
           </div>
@@ -52,8 +52,8 @@
       </div>
     </div>
 
-    <div *ngIf="isModalCheckinOpen"  class="absolute z-21 w-40">
-      <div id="dropdownCheckin" class="absolute top-48 z-20 w-52 bg-white border border-rentcinza rounded-lg shadow-lg">
+    <div *ngIf="isModalCheckinOpen"  class="absolute z-21">
+      <div id="dropdownCheckin" class="absolute top-48 z-20 w-72 bg-white border border-rentcinza rounded-lg shadow-lg">
         <div class="flex flex-col p-5 gap-y-1 text-rentazul">
           <label for="min-value" class="block mb-1 text-md font-bold">Data de Check-in</label>
           <div class="flex items-center gap-1">
@@ -198,31 +198,31 @@
           <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
             <div class="flex flex-col gap-y-3">
               <label for="checkinInicio"><b>Check-in Inicial</b></label>
-              <input [(ngModel)]="seletor.dataCheckinInicio" type="datetime-local" name="checkinInicio" class="text-sm p-3 border border-rentcinza rounded-md">
+              <input [(ngModel)]="seletor.dataCheckinInicio" type="datetime-local" name="checkinInicio" class="text-sm p-3 border border-rentcinza rounded-xl">
             </div>
             <div class="flex flex-col gap-y-3">
               <label for="checkinFinal"><b>Check-in Final</b></label>
-              <input [(ngModel)]="seletor.dataCheckinFinal" type="datetime-local" name="checkinFinal" class="text-sm p-3 border border-rentcinza rounded-md">
+              <input [(ngModel)]="seletor.dataCheckinFinal" type="datetime-local" name="checkinFinal" class="text-sm p-3 border border-rentcinza rounded-xl">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
             <div class="flex flex-col gap-y-3">
               <label for="checkoutInicio"><b>Checkout Inicial</b></label>
-              <input [(ngModel)]="seletor.dataCheckoutEfetivoInicio" type="datetime-local" name="checkoutInicio" class="text-sm p-3 border border-rentcinza rounded-md">
+              <input [(ngModel)]="seletor.dataCheckoutEfetivoInicio" type="datetime-local" name="checkoutInicio" class="text-sm p-3 border border-rentcinza rounded-xl">
             </div>
             <div class="flex flex-col gap-y-3">
               <label for="checkoutFinal"><b>Checkout Final</b></label>
-              <input [(ngModel)]="seletor.dataCheckoutEfetivoFinal" type="datetime-local" name="checkoutFinal" class="text-sm p-3 border border-rentcinza rounded-md">
+              <input [(ngModel)]="seletor.dataCheckoutEfetivoFinal" type="datetime-local" name="checkoutFinal" class="text-sm p-3 border border-rentcinza rounded-xl">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
             <div class="flex flex-col gap-y-3">
               <label for="qtdDiasInicio"><b>Dias Inicial</b></label>
-              <input type="number" [(ngModel)]="seletor.qtdDiasMin" class="text-sm p-3 border border-rentcinza rounded-md">
+              <input type="number" [(ngModel)]="seletor.qtdDiasMin" class="text-sm p-3 border border-rentcinza rounded-xl">
             </div>
             <div class="flex flex-col gap-y-3">
               <label for="qtdDiasFinal"><b>Dias Final</b></label>
-              <input type="number" [(ngModel)]="seletor.qtdDiasMax" type="number" name="qtdDiasFinal" class="text-sm p-3 border border-rentcinza rounded-md">
+              <input type="number" [(ngModel)]="seletor.qtdDiasMax" type="number" name="qtdDiasFinal" class="text-sm p-3 border border-rentcinza rounded-xl">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">

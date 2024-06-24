@@ -10,7 +10,7 @@ export class Aluguel{
   valorDiaria: number
   valorLimpeza: number
   valorMulta: number
-  qtdDias: number
+  qtdDias: number = 0
   imovel: Imovel
   inquilino: Inquilino
 }

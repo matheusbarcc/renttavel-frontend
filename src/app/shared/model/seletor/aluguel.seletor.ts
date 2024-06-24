@@ -5,8 +5,8 @@ export class AluguelSeletor extends BaseSeletor {
   dataCheckinFinal: Date;
   dataCheckoutPrevistoInicio: Date;
   dataCheckoutPrevistoFinal: Date;
-  dataCheckoutEfetivoInicio?: Date;
-  dataCheckoutEfetivoFinal: Date;
+  dataCheckoutEfetivoInicio: Date;
+  dataCheckoutEfetivoFinal?: Date;
   valorTotalMin?: number;
   valorTotalMax?: number;
   valorDiariaMin: number;

@@ -34,16 +34,26 @@ export class AluguelDetalheComponent implements OnInit {
     this.consultarTodosInquilinos();
   }
 
-  calculateQtdDias(): void {
-    if (this.aluguel.dataCheckin && this.aluguel.dataCheckoutPrevisto) {
-      const checkinDate = new Date(this.aluguel.dataCheckin);
-      const checkoutDate = new Date(this.aluguel.dataCheckoutPrevisto);
-      const timeDifference = checkoutDate.getTime() - checkinDate.getTime();
-      const dayDifference = timeDifference / (1000 * 3600 * 24);
-      this.aluguel.qtdDias = Math.round(dayDifference);
+  calcularQtdDias(): void {
+    if (this.aluguel.dataCheckin) {
+      const checkoutDate = this.aluguel.dataCheckoutEfetivo || this.aluguel.dataCheckoutPrevisto;
+      if (checkoutDate) {
+        this.aluguel.qtdDias = this.calculateDayDifference(this.aluguel.dataCheckin, checkoutDate);
+      } else {
+        this.aluguel.qtdDias = 0;
+      }
     } else {
       this.aluguel.qtdDias = 0;
     }
+  }
+
+  private calculateDayDifference(startDate: Date, endDate: Date): number {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const timeDifference = end.getTime() - start.getTime();
+    const dayDifference = timeDifference / (1000 * 3600 * 24);
+    const dayDifferenceRounded = Math.round(dayDifference);
+    return dayDifferenceRounded > 0 ? dayDifferenceRounded : 0;
   }
 
   verificarId() {

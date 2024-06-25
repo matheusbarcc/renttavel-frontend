@@ -47,7 +47,7 @@ export class AluguelListagemComponent implements OnInit{
         this.contarRegistros()
       },
       erro => {
-        console.log('Erro ao buscar aluguel ' + erro)
+        Swal.fire('Erro ao pesquisar aluguéis!', erro.error.mensagem, 'error')
       }
     )
     this.contarPaginas()

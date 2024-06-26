@@ -5,8 +5,8 @@ export class Aluguel{
   id: number
   dataCheckin: Date
   dataCheckoutPrevisto: Date
-  dataCheckoutEfetivo: Date
-  valorTotal: number
+  dataCheckoutEfetivo?: Date
+  valorTotal: number = 0
   valorDiaria: number
   valorLimpeza: number
   valorMulta: number

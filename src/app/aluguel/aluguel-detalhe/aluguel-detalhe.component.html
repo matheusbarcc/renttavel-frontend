@@ -1,4 +1,3 @@
-
 <div class="flex flex-col gap-11">
 
   <div class="flex items-center justify-between space-x-2 flex-start pt-10 px-32">
@@ -16,8 +15,8 @@
         <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl">
           <div class="flex flex-col gap-y-2">
             <label class="truncate" for="dataCheckin"><b>Check-in</b></label>
-            <input (blur)="calcularValorTotal()" [(ngModel)]="aluguel.dataCheckin" name="dataCheckin" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
-              (change)="calcularQtdDias()"
+            <input [(ngModel)]="aluguel.dataCheckin" name="dataCheckin" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
+              (change)="calcularQtdDias()" (change)="calcularValorTotal()"
               [ngClass]="{
                 'border-red-500 ring-2 ring-red-500 ring-inset': (form.submitted && !aluguel.dataCheckin) || (form.submitted && !aluguel.qtdDias)
               }">
@@ -26,8 +25,8 @@
           </div>
           <div class="flex flex-col gap-y-2">
             <label class="truncate" for="dataCheckoutPrevisto"><b>Checkout Previsto</b></label>
-            <input (blur)="calcularValorTotal()" [(ngModel)]="aluguel.dataCheckoutPrevisto" name="dataCheckoutPrevisto" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
-              (change)="calcularQtdDias()"
+            <input [(ngModel)]="aluguel.dataCheckoutPrevisto" name="dataCheckoutPrevisto" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
+              (change)="calcularQtdDias()" (change)="calcularValorTotal()"
               [ngClass]="{
                 'border-red-500 ring-2 ring-red-500 ring-inset': (form.submitted && !aluguel.dataCheckoutPrevisto) || (form.submitted && !aluguel.qtdDias)
               }">
@@ -36,8 +35,8 @@
           </div>
           <div class="flex flex-col gap-y-2">
             <label class="truncate" for="dataCheckoutEfetivo"><b>Checkout Efetivo</b></label>
-            <input (blur)="calcularValorTotal()" [(ngModel)]="aluguel.dataCheckoutEfetivo" name="dataCheckoutEfetivo" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
-              (change)="calcularQtdDias()">
+            <input [(ngModel)]="aluguel.dataCheckoutEfetivo" name="dataCheckoutEfetivo" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
+              (change)="calcularQtdDias()" (change)="calcularValorTotal()">
           </div>
         </div>
         <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl">
@@ -98,21 +97,21 @@
 
           </div>
         </div>
-        <div class="flex justify-center"><div class="h-px bg-rentcinza w-full mt-5"></div></div>
-        <div>
+        <div class="flex items-center gap-3">
           <h2 class="text-3xl font-bold text-rentazul">Resumo</h2>
+          <div class="flex-1 h-px bg-rentcinza"></div>
         </div>
         <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl mb-5">
           <div class="flex flex-col gap-y-2">
             <label class="truncate" for="qtdDias"><b>Quantidade de Dias</b></label>
             <div class="flex items-center justify-center border-2 border-rentcinza rounded-xl py-8 text-center text-lg shadow-md">
-              <span>{{aluguel.qtdDias}} dias</span>
+              <span (change)="calcularValorTotal()"> {{aluguel.qtdDias}} dias</span>
             </div>
           </div>
           <div class="flex flex-col gap-y-2 col-span-2">
             <label class="truncate" for="valorTotal"><b>Valor Total</b></label>
             <div class="flex items-center text-lg justify-center border-2 border-rentlaranja py-8 rounded-xl shadow-md">
-              <span>R$ {{ (aluguel.valorDiaria || 0) * (aluguel.qtdDias || 0) + (aluguel.valorLimpeza || 0) + (aluguel.valorMulta || 0) }}</span>
+              <span>R$ {{ aluguel.valorTotal }}</span>
             </div>
           </div>
         </div>

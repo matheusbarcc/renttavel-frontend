@@ -20,6 +20,10 @@ export class AluguelListagemComponent implements OnInit{
   public imoveis: Imovel[] = [];
   public inquilinos: Inquilino[] = [];
   public aluguel: Aluguel = new Aluguel();
+  public isClicked: boolean = false;
+  public alHoverId: number | null = null;
+  public inputVisibleId: number | null = null;
+  public checkoutAux: Date;
   public seletor: AluguelSeletor = new AluguelSeletor();
   public isModalFiltrosOpen: boolean;
   public isModalValorOpen: boolean;
@@ -40,21 +44,73 @@ export class AluguelListagemComponent implements OnInit{
     this.consultarTodosInquilino();
   }
 
+  clicadoEPreenchido(clicked: boolean, checkout: Date, a: Aluguel ){
+    if(clicked && checkout != undefined){
+      a.dataCheckoutEfetivo = checkout;
+      this.alterar(a)
+    }
+  }
+
+  closeInput(a: Aluguel): void{
+    if(a.dataCheckoutEfetivo != undefined){
+      this.checkoutAux = a.dataCheckoutEfetivo;
+    } else {
+      a.dataCheckoutEfetivo = undefined;
+    }
+  }
+
+  showInput(a: Aluguel, event: MouseEvent): void {
+    event.stopPropagation();
+
+    a.dataCheckoutEfetivo = undefined;
+    this.inputVisibleId = a.id;
+  }
+
+  isInputVisible(id: number): boolean {
+    if(id != null){
+      this.aluguel.dataCheckoutEfetivo = undefined
+    }
+    return this.inputVisibleId === id;
+  }
+
   pesquisar(){
     this.aluguelService.consultarComSeletor(this.seletor).subscribe(
       resultado => {
-        this.alugueis = resultado
-        this.contarRegistros()
+        this.alugueis = resultado;
+        this.contarRegistros();
       },
       erro => {
-        Swal.fire('Erro ao pesquisar aluguéis!', erro.error.mensagem, 'error')
+        Swal.fire('Erro ao pesquisar aluguéis!', erro.error.mensagem, 'error');
       }
     )
-    this.contarPaginas()
+    this.contarPaginas();
   }
 
   alterar(aluguelSelecionado: Aluguel){
     this.router.navigate(['/aluguel/detalhe/'+ aluguelSelecionado.id])
+  }
+
+  efetivarCheckout(aluguelSelecionado: Aluguel) {
+    this.aluguelService.alterar(aluguelSelecionado).subscribe(
+      resultado => {
+        Swal.fire({
+          title: "Checkout efetivado com sucesso!",
+          text: "",
+          icon: "success",
+          showConfirmButton: true,
+          confirmButtonColor: "#ff914d"
+        })
+      },
+      erro => {
+        Swal.fire({
+          title: "Erro ao efetivar checkout do aluguel",
+          html: erro.error.mensagem,
+          icon: "error",
+          showConfirmButton: true,
+          confirmButtonColor: "#ff914d"
+        })
+      }
+    )
   }
 
   excluir(aluguelSelecionado: Aluguel){

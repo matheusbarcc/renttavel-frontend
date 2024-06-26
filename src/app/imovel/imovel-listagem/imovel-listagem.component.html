@@ -15,11 +15,11 @@
     <div class="flex items-center border border-rentcinza w-4/12 pl-8 pr-2 rounded-full gap-x-5 shadow-md">
       <input class="form-control w-7/12 h-10 text-lg focus:outline-none my-2" type="text" placeholder="Nome" [(ngModel)]="seletor.nome" (keyup.enter)="pesquisar()">
       <div class="w-px h-9 bg-rentcinza"></div>
-      <button (click)="abrirFiltros()" class="flex items-center justify-center w-3/12 p-2 text-xl text-rentcinza rounded-xl hover:bg-slate-300/20">
+      <button (click)="abrirFiltros()" class="flex items-center justify-center w-3/12 p-2 text-xl text-rentcinza rounded-xl easy-in-out duration-100 hover:scale-105 hover:bg-slate-300/20">
         <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/cccccc/sorting-options.png" alt="sorting-options"/>
          &nbsp;Filtros
       </button>
-      <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="pesquisar()">
+      <button class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md easy-in-out duration-100 hover:scale-110 hover:shadow-lg" (click)="pesquisar()">
         <img width="25" height="25" src="https://img.icons8.com/sf-black/25/FFFFFF/search.png" alt="search"/>
       </button>
     </div>
@@ -37,10 +37,10 @@
       </select>
     <span class="flex items-center justify-center text-rentazul w-32 select-none">{{(seletor.limite * (seletor.pagina - 1)) + 1}} - {{seletor.limite * seletor.pagina}} de {{ totalRegistros }}</span>
     <div class="flex items-center gap-7">
-      <button class="disabled:opacity-30 select-none" id="btnPaginacao" id="navPaginacao" (click)="voltarPg()" [disabled]="seletor.pagina == 1">
+      <button class="disabled:opacity-30 select-none easy-in-out duration-100 hover:scale-110" id="btnPaginacao" id="navPaginacao" (click)="voltarPg()" [disabled]="seletor.pagina == 1">
         <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/back.png" alt="back"/>
       </button>
-      <button class="disabled:opacity-30 select-none" id="btnPaginacao" id="navPaginacao" (click)="proximaPg()" [disabled]="seletor.pagina == totalPaginas">
+      <button class="disabled:opacity-30 select-none easy-in-out duration-100 hover:scale-110" id="btnPaginacao" id="navPaginacao" (click)="proximaPg()" [disabled]="seletor.pagina == totalPaginas">
         <img width="25" height="25" src="https://img.icons8.com/ios-filled/25/021e43/forward--v1.png" alt="forward--v1"/>
       </button>
     </div>
@@ -80,10 +80,10 @@
             </ng-container>
           </p>
           <div class="flex gap-2">
-            <button class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-10 w-11/12 h-14 rounded-2xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="alterar(imovel)">
+            <button class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-10 w-11/12 h-14 rounded-2xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg" (click)="alterar(imovel)">
               <b>Editar</b> <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png" alt="edit--v1"/>
             </button>
-            <button class="flex items-center justify-center text-xl bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-3 w-2/6 h-14 rounded-2xl shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="excluir(imovel)">
+            <button class="flex items-center justify-center text-xl bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-3 w-2/6 h-14 rounded-2xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg" (click)="excluir(imovel)">
               <img width="33" height="33" src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png" alt="delete-forever"/>
             </button>
           </div>
@@ -269,10 +269,10 @@
         </div>
       </div>
       <div class="flex justify-between">
-        <button class="border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="limparSeletor()">
+        <button class="border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg" (click)="limparSeletor()">
           <p>Limpar filtros</p>
         </button>
-        <button class="flex items-center gap-4 bg-rentlaranja text-xl py-3 px-8 rounded-xl text-rentbranco font-bold shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg" (click)="pesquisar()" (click)="fecharFiltros()">
+        <button class="flex items-center gap-4 bg-rentlaranja text-xl py-3 px-8 rounded-xl text-rentbranco font-bold shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg" (click)="pesquisar()" (click)="fecharFiltros()">
           <p>Filtrar</p>
           <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/sorting-options.png" alt="sorting-options"/>
         </button>

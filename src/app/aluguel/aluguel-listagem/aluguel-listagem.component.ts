@@ -24,6 +24,8 @@ export class AluguelListagemComponent implements OnInit{
   public alHoverId: number | null = null;
   public inputVisibleId: number | null = null;
   public checkoutAux: Date;
+  public aluguelAux: Aluguel = new Aluguel();
+  public aluguelAux2: Aluguel = new Aluguel();
   public seletor: AluguelSeletor = new AluguelSeletor();
   public isModalFiltrosOpen: boolean;
   public isModalValorOpen: boolean;
@@ -47,13 +49,22 @@ export class AluguelListagemComponent implements OnInit{
   clicadoEPreenchido(clicked: boolean, checkout: Date, a: Aluguel ){
     if(clicked && checkout != undefined){
       a.dataCheckoutEfetivo = checkout;
-      this.alterar(a)
+      this.efetivarCheckout(a)
     }
+  }
+
+  consultarPorId() {
+    this.aluguelService.consultarPorId(this.aluguelAux.id).subscribe(
+      resultado => {
+        this.aluguelAux2 = resultado;
+      },
+      erro => console.log('Erro ao consultar aluguel por id: ' + erro)
+    )
   }
 
   closeInput(a: Aluguel): void{
     if(a.dataCheckoutEfetivo != undefined){
-      this.checkoutAux = a.dataCheckoutEfetivo;
+      this.aluguelAux = a;
     } else {
       a.dataCheckoutEfetivo = undefined;
     }

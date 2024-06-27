@@ -161,19 +161,20 @@
         </div>
         <div class="flex flex-col gap-1 relative">
           <label class="text-xl font-bold">Checkout Efetivo</label>
+          <p *ngIf="a.dataCheckoutEfetivo && !isInputVisible(a.id)">{{ a.dataCheckoutEfetivo | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
 
           <button *ngIf="!a.dataCheckoutEfetivo && !isInputVisible(a.id)" class="w-52 h-10 px-1 py-2 text-sm border-2 rounded-md border-rentazul text-rentazul
           hover:border-rentlaranja hover:text-rentlaranja hover:font-semibold
           easy-in-out duration-100 hover:scale-95 hover:shadow-md" (mouseenter)="alHoverId = a.id"
-          (mouseleave)="alHoverId = null" (click)="showInput(a, $event)">
-          <span *ngIf="alHoverId !== a.id">Checkout Não Efetivado</span>
-          <span *ngIf="alHoverId === a.id">Efetivar Checkout</span>
-        </button>
-        <div class="flex justify-between items-center gap-2">
-            <input *ngIf="isInputVisible(a.id) || a.dataCheckoutEfetivo" [(ngModel)]="a.dataCheckoutEfetivo"
-              type="datetime-local" class="w-32 h-10 px-3 py-2 text-sm border-2 rounded-md border-rentazul text-rentazul"
-              (click)="$event.stopPropagation()" (blur)="closeInput(a)">
-            <button *ngIf="isInputVisible(a.id)" (click)="isClicked = true; clicadoEPreenchido(isClicked, checkoutAux, a)"
+            (mouseleave)="alHoverId = null" (click)="showInput(a, $event)">
+            <span *ngIf="alHoverId !== a.id">Checkout Não Efetivado</span>
+            <span *ngIf="alHoverId === a.id">Efetivar Checkout</span>
+          </button>
+          <div *ngIf="isInputVisible(a.id)" class="flex justify-between items-center gap-2">
+            <input [(ngModel)]="a.dataCheckoutEfetivo" type="datetime-local" class=" h-10 px-3 py-2 text-xs border rounded-md
+          border-rentcinza text-rentazul" (blur)="closeInput(a)">
+            <button *ngIf="isInputVisible(a.id)"
+              (click)="efetivarCheckout(a); pesquisar()"
               class="bg-rentlaranja p-2 rounded-lg shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg">
               <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/50/FFFFFF/checkmark--v1.png"
                 alt="checkmark--v1" />

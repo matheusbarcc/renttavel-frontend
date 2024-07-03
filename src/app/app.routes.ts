@@ -14,4 +14,8 @@ export const routes: Routes = [
     path: 'endereco',
     loadChildren:() => import('./endereco/endereco.module').then(m => m.EnderecoModule),
   },
+  {
+    path: 'inquilino',
+    loadChildren:() => import('./inquilino/inquilino.module').then(m => m.InquilinoModule),
+  },
 ];

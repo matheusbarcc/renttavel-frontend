@@ -1,1 +1,426 @@
-<p>endereco-listagem works!</p>
+<div class="flex flex-col gap-8">
+  <!-- Titulo e Logo -->
+  <div class="flex items-center justify-between flex-start pt-10 px-32">
+    <h1 class="flex items-center gap-5 text-rentazul">
+      <b><span class="text-5xl">Endereço</span></b>
+      <img
+        width="20"
+        height="20"
+        src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png"
+        alt="forward--v1"
+      />
+      <span class="text-4xl">Cadastro</span>
+    </h1>
+    <img
+      src="https://i.imgur.com/brCEmd5.png"
+      alt="Logo Renttavel"
+      class="w-72 h-16"
+    />
+  </div>
+
+  <!-- Barra de busca e Filtros -->
+  <div class="flex items-center justify-center">
+    <div
+      class="flex items-center border border-rentcinza w-5/12 pl-8 pr-2 py-2 rounded-full gap-x-4 shadow-md"
+    >
+      <button
+        class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl easy-in-out duration-100 hover:scale-105 hover:bg-slate-300/20"
+        (click)="toggleFiltroEstado()"
+        (click)="closeFiltroBairro()"
+        (click)="closeFiltroCidade()"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/ios-filled/25/cccccc/place-marker.png"
+          alt="place-marker"
+        />
+        &nbsp;Estado
+      </button>
+      <div class="w-px h-9 bg-rentcinza"></div>
+      <button
+        class="flex items-center justify-center w-3/12 gap-1 p-2 text-xl text-rentcinza rounded-xl easy-in-out duration-100 hover:scale-105 hover:bg-slate-300/20"
+        (click)="toggleFiltroCidade()"
+        (click)="closeFiltroBairro()"
+        (click)="closeFiltroEstado()"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/ios-glyphs/25/cccccc/city.png"
+          alt="city"
+        />
+        &nbsp;Cidade
+      </button>
+      <div class="w-px h-9 bg-rentcinza"></div>
+      <button
+        class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl easy-in-out duration-100 hover:scale-105 hover:bg-slate-300/20"
+        (click)="toggleFiltroBairro()"
+        (click)="closeFiltroCidade()"
+        (click)="closeFiltroEstado()"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/ios-glyphs/25/cccccc/neighbor.png"
+          alt="neighbor"
+        />
+        &nbsp;Bairro
+      </button>
+      <div class="w-px h-9 bg-rentcinza"></div>
+      <button
+        class="flex items-center justify-center gap-1 p-2 text-xl text-rentcinza rounded-xl easy-in-out duration-100 hover:scale-105 hover:bg-slate-300/20"
+        (click)="openModalFiltros()"
+        (click)="closeFiltroBairro()"
+        (click)="closeFiltroCidade()"
+        (click)="closeFiltroEstado()"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/ios-glyphs/30/cccccc/sorting-options.png"
+          alt="sorting-options"
+        />
+        &nbsp;Filtros
+      </button>
+      <button
+        class="flex justify-center items-center w-12 h-11 rounded-full bg-rentlaranja text-rentbranco shadow-md hover:ring-2 hover:ring-rentlaranja hover:shadow-lg"
+        (click)="pesquisar()"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/sf-black/25/FFFFFF/search.png"
+          alt="search"
+        />
+      </button>
+    </div>
+  </div>
+
+  <!-- Dropdowns -->
+  <div *ngIf="isModalEstadoOpen" class="absolute z-21">
+    <div
+      id="dropdownEstado"
+      class="absolute top-48 z-20 w-52 bg-white border border-rentcinza rounded-lg shadow-lg"
+    >
+      <div class="flex flex-col p-5 gap-y-1 text-rentazul">
+        <label for="estado" class="block mb-1 text-md font-bold">Estado</label>
+        <div class="flex items-center gap-1">
+          <input
+            [(ngModel)]="seletor.estado"
+            type="text"
+            class="text-sm p-2 border rounded-md w-11/12"
+            maxlength="2"
+            placeholder="SP"
+          />
+          <button (click)="limparSeletorEstado()">
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png"
+              alt="delete-forever"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isModalCidadeOpen" class="absolute z-21">
+    <div
+      id="dropdownCidade"
+      class="absolute top-48 z-20 w-72 bg-white border border-rentcinza rounded-lg shadow-lg"
+    >
+      <div class="flex flex-col p-5 gap-y-1 text-rentazul">
+        <label for="cidade" class="block mb-1 text-md font-bold">Cidade</label>
+        <div class="flex items-center gap-1">
+          <input
+            [(ngModel)]="seletor.cidade"
+            type="text"
+            class="text-sm p-2 border rounded-md w-11/12"
+          />
+          <button (click)="limparSeletorCidade()">
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png"
+              alt="delete-forever"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isModalBairroOpen" class="absolute z-21">
+    <div
+      id="dropdownBairro"
+      class="absolute top-48 z-20 w-72 bg-white border border-rentcinza rounded-lg shadow-lg"
+    >
+      <div class="flex flex-col p-5 gap-y-1 text-rentazul">
+        <label for="bairro" class="block mb-1 text-md font-bold">Bairro</label>
+        <div class="flex items-center gap-1">
+          <input
+            [(ngModel)]="seletor.bairro"
+            type="text"
+            class="text-sm p-2 border rounded-md w-11/12"
+          />
+          <button (click)="limparSeletorBairro()">
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png"
+              alt="delete-forever"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paginacao -->
+  <div class="flex justify-start ml-48 gap-2 items-center">
+    <label class="text-rentazul select-none" for="limitePg"
+      >Itens por página:
+    </label>
+    <select
+      class="text-rentazul rounded border border-rentcinza p-2 hover:outline-none select-none"
+      name="limitePg"
+      [(ngModel)]="seletor.limite"
+      (change)="pesquisar()"
+    >
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="4">4</option>
+      <option value="8">8</option>
+      <option value="12">12</option>
+    </select>
+    <span
+      class="flex items-center justify-center text-rentazul w-32 select-none"
+      >{{ seletor.limite * (seletor.pagina - 1) + 1 }} -
+      {{ seletor.limite * seletor.pagina }} de {{ totalRegistros }}</span
+    >
+    <div class="flex items-center gap-7">
+      <button
+        class="disabled:opacity-30 select-none"
+        id="btnPaginacao"
+        (click)="voltarPg()"
+        [disabled]="seletor.pagina == 1"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/ios-filled/25/021e43/back.png"
+          alt="back"
+        />
+      </button>
+      <button
+        class="disabled:opacity-30 select-none"
+        id="btnPaginacao"
+        (click)="proximaPg()"
+        [disabled]="seletor.pagina == totalPaginas"
+      >
+        <img
+          width="25"
+          height="25"
+          src="https://img.icons8.com/ios-filled/25/021e43/forward--v1.png"
+          alt="forward--v1"
+        />
+      </button>
+    </div>
+  </div>
+
+  <!-- Endereços -->
+  <div class="flex flex-col items-center justify-center gap-5 mb-5">
+    <div
+      class="flex justify-evenly py-10 w-2/3 bg-rentbranco border border-rentcinza rounded-2xl shadow-lg text-rentazul"
+      *ngFor="let e of enderecos"
+    >
+      <div class="flex flex-col gap-y-8">
+        <h2 class="text-3xl font-bold">Região</h2>
+        <div>
+          <label class="text-xl font-bold" for="estado">Estado</label>
+          <p class="text-lg" id="estado">{{ e.estado }}</p>
+        </div>
+        <div>
+          <label class="text-xl font-bold" for="cidade">Cidade</label>
+          <p class="text-lg" id="cidade">{{ e.cidade }}</p>
+        </div>
+      </div>
+      <div class="w-px h-64 bg-rentcinza"></div>
+      <div class="flex flex-col gap-y-8">
+        <h2 class="text-3xl font-bold">Endereço</h2>
+        <div>
+          <label class="text-xl font-bold" for="bairro">Bairro</label>
+          <p class="text-lg" id="bairro">{{ e.bairro }}</p>
+        </div>
+        <div>
+          <label class="text-xl font-bold" for="rua">Rua</label>
+          <p class="text-lg" id="rua">{{ e.rua }}</p>
+        </div>
+      </div>
+      <div class="w-px h-64 bg-rentcinza"></div>
+      <div class="flex flex-col gap-y-6">
+        <h2 class="text-3xl font-bold">Detalhes</h2>
+        <div
+          class="flex flex-col gap-y-1 border border-rentcinza p-2 rounded-md"
+        >
+          <label class="text-xl font-bold" for="cep">CEP</label>
+          <p class="text-lg" id="cep">{{ e.cep }}</p>
+        </div>
+        <div
+          class="flex flex-col gap-y-1 border border-rentlaranja p-2 rounded-md"
+        >
+          <label class="text-xl font-bold" for="numero">Número</label>
+          <p class="text-lg" id="numero">{{ e.numero }}</p>
+        </div>
+      </div>
+      <!-- Botões de editar e excluir -->
+      <div class="w-px h-64 bg-rentcinza"></div>
+      <div class="flex flex-col justify-center gap-y-3">
+        <button
+          class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-6 py-4 rounded-xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg"
+          (click)="alterar(e)"
+        >
+          <b>Editar</b>
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png"
+            alt="edit--v1"
+          />
+        </button>
+        <button
+          class="flex items-center justify-center gap-2 text-lg bg-rentbranco text-rentlaranja border-2 border-rentlaranja px-5 py-3 rounded-xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg"
+          (click)="excluir(e)"
+        >
+          <b>Excluir</b>
+          <img
+            width="33"
+            height="33"
+            src="https://img.icons8.com/sf-regular-filled/96/fd9054/delete-forever.png"
+            alt="delete-forever"
+          />
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal Filtros +++ -->
+    <div
+      *ngIf="isModalFiltrosOpen"
+      class="modal-overlay fixed inset-0 flex items-center justify-center bg-rentpreto bg-opacity-50 backdrop-filter ml-64"
+    >
+      <div
+        class="modal-content bg-rentbranco flex flex-col border border-rentcinza w-5/12 rounded-3xl"
+      >
+        <div class="flex justify-between items-center py-3 px-8">
+          <button (click)="closeModalFiltros()">
+            <img
+              width="20"
+              height="20"
+              src="https://img.icons8.com/ios/25/021e43/delete-sign--v1.png"
+              alt="delete-sign--v1"
+            />
+          </button>
+          <h2 class="flex-1 text-center text-rentazul text-2xl">
+            <b>Endereços</b>
+          </h2>
+        </div>
+        <hr class="w-full border-rentcinza" />
+        <div class="flex flex-col px-10 py-5 gap-5">
+          <div class="flex flex-col gap-5">
+            <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+              <div class="flex flex-col gap-y-3">
+                <label for="estado"><b>Estado</b></label>
+                <input
+                  type="text"
+                  [(ngModel)]="seletor.estado"
+                  name="estado"
+                  maxlength="2"
+                  placeholder="SC"
+                  class="text-sm p-3 border border-rentcinza rounded-xl"
+                />
+              </div>
+              <div class="flex flex-col gap-y-3">
+                <label for="cidade"><b>Cidade</b></label>
+                <input
+                  type="text"
+                  [(ngModel)]="seletor.cidade"
+                  name="cidade"
+                  placeholder="Florianópolis"
+                  class="text-sm p-3 border border-rentcinza rounded-xl"
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+              <div class="flex flex-col gap-y-3">
+                <label for="bairro"><b>Bairro</b></label>
+                <input
+                  type="text"
+                  [(ngModel)]="seletor.bairro"
+                  name="bairro"
+                  placeholder="Ribeirão da Ilha"
+                  class="text-sm p-3 border border-rentcinza rounded-xl"
+                />
+              </div>
+              <div class="flex flex-col gap-y-3">
+                <label for="rua"><b>Rua</b></label>
+                <input
+                  type="text"
+                  [(ngModel)]="seletor.rua"
+                  name="rua"
+                  placeholder="Rodovia Baldicero Filomeno"
+                  class="text-sm p-3 border border-rentcinza rounded-xl"
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-x-5 gap-y-5 text-rentazul text-xl">
+              <div class="flex flex-col gap-y-3">
+                <label for="cep"><b>CEP</b></label>
+                <input
+                  type="text"
+                  [(ngModel)]="seletor.cep"
+                  name="cep"
+                  maxlength="8"
+                  placeholder="12345678"
+                  class="text-sm p-3 border border-rentcinza rounded-xl"
+                />
+              </div>
+              <div class="flex flex-col gap-y-3">
+                <label for="numero"><b>Número</b></label>
+                <input
+                  type="text"
+                  [(ngModel)]="seletor.numero"
+                  name="numero"
+                  placeholder="123"
+                  class="text-sm p-3 border border-rentcinza rounded-xl"
+                />
+              </div>
+            </div>
+            <div class="flex justify-between">
+              <button
+                class="border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg"
+                (click)="limparSeletor()"
+              >
+                <p>Limpar filtros</p>
+              </button>
+              <button
+                class="flex items-center gap-4 bg-rentlaranja text-xl py-3 px-8 rounded-xl text-rentbranco font-bold shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg"
+                (click)="pesquisar()"
+                (click)="closeModalFiltros()"
+              >
+                <p>Filtrar</p>
+                <img
+                  width="25"
+                  height="25"
+                  src="https://img.icons8.com/ios-glyphs/30/FFFFFF/sorting-options.png"
+                  alt="sorting-options"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

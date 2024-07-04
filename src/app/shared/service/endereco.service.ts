@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Imovel } from '../model/imovel';
 import { Endereco } from '../model/endereco';
 import { EnderecoSeletor } from '../model/seletor/endereco.seletor';
 
@@ -10,7 +9,7 @@ import { EnderecoSeletor } from '../model/seletor/endereco.seletor';
 })
 export class EnderecoService {
 
-  private readonly API = 'http://localhost:8080/renttavel-backend/rest/endereco';
+  private readonly API = 'http://localhost:8080/renttavel-backend/rest/restrito/endereco';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -35,6 +34,10 @@ export class EnderecoService {
 
   consultarComSeletor(seletor: EnderecoSeletor): Observable<Array<Endereco>>{
     return this.httpClient.post<Array<Endereco>>(this.API + '/filtro', seletor)
+  }
+
+  consultarPorAnfitriao(idAnfitriao: number): Observable<Array<Endereco>>{
+    return this.httpClient.get<Array<Endereco>>(this.API + '/anfitriao/' + idAnfitriao)
   }
 
   contarRegistros(seletor: EnderecoSeletor): Observable<number>{

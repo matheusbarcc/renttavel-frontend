@@ -7,6 +7,7 @@ import { Aluguel } from '../../shared/model/aluguel';
 import { Imovel } from '../../shared/model/imovel';
 import { Inquilino } from '../../shared/model/inquilino';
 import { InquilinoService } from '../../shared/service/inquilino.service';
+import { Anfitriao } from '../../shared/model/anfitriao';
 
 
 @Component({
@@ -16,9 +17,11 @@ import { InquilinoService } from '../../shared/service/inquilino.service';
 })
 export class AluguelDetalheComponent implements OnInit {
   public aluguel: Aluguel = new Aluguel();
+  public anfitriao: Anfitriao = new Anfitriao();
   public imoveis: Imovel[] = [];
   public inquilinos: Inquilino[] = [];
   public idAluguel: number;
+  public idAnfitriaoHeader: number;
 
   constructor(
     private aluguelService: AluguelService,
@@ -29,9 +32,28 @@ export class AluguelDetalheComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader();
+    this.setAnfitriaoImovel();
     this.verificarId();
-    this.consultarTodosImoveis();
-    this.consultarTodosInquilinos();
+    this.consultarImoveis();
+    this.consultarInquilinos();
+  }
+
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
+  }
+
+  setAnfitriaoImovel() {
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if (usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.anfitriao = usuario; // Define o anfitrião como o usuário autenticado
+      this.aluguel.anfitriao = this.anfitriao; // Define o anfitrião do imóvel
+    }
   }
 
   calcularQtdDias(): void {
@@ -83,6 +105,7 @@ export class AluguelDetalheComponent implements OnInit {
   }
 
   inserir() {
+    this.setAnfitriaoImovel();
     this.aluguelService.salvar(this.aluguel).subscribe(
       resultado => {
         Swal.fire({
@@ -139,30 +162,31 @@ export class AluguelDetalheComponent implements OnInit {
   }
 
   voltar(): void {
-    this.router.navigate(['/aluguel'])
+    this.router.navigate(['/home/aluguel'])
   }
 
-  consultarTodosImoveis(): void {
-    this.imovelService.consultarTodos().subscribe(
+  consultarImoveis(){
+    this.imovelService.consultarPorAnfitriao(this.idAnfitriaoHeader).subscribe(
       resultado => {
-        this.imoveis = resultado;
+        this.imoveis = resultado
       },
-      (error) => {
-        console.error('Erro ao carregar imóveis', error);
+      erro => {
+        console.log('Erro ao buscar alugueis ' + erro)
       }
-    );
+    )
   }
 
-  consultarTodosInquilinos(): void {
-    this.inquilinoService.consultarTodos().subscribe(
+  consultarInquilinos(){
+    this.inquilinoService.consultarPorAnfitriao(this.idAnfitriaoHeader).subscribe(
       resultado => {
-        this.inquilinos = resultado;
+        this.inquilinos = resultado
       },
-      (error) => {
-        console.error('Erro ao carregar inquilinos', error);
+      erro => {
+        console.log('Erro ao buscar alugueis ' + erro)
       }
-    );
+    )
   }
+
   public compareById(r1: any, r2: any): boolean {
     return r1 && r2 ? r1.id === r2.id : r1 === r2
   }

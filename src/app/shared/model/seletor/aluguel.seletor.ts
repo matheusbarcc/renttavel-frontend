@@ -19,4 +19,5 @@ export class AluguelSeletor extends BaseSeletor {
   qtdDiasMax: number;
   idImovel: number;
   idInquilino: number;
+  idAnfitriao: number;
 }

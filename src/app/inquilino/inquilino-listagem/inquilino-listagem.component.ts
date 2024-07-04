@@ -18,15 +18,26 @@ export class InquilinoListagemComponent implements OnInit {
   public totalPaginas: number;
   public totalRegistros: number;
   public offset: number;
+  public idAnfitriaoHeader: number;
 
   constructor(private inquilinoService: InquilinoService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader()
     this.pesquisar();
   }
 
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
+  }
+
   pesquisar() {
+    this.seletor.idAnfitriao = this.idAnfitriaoHeader;
     this.inquilinoService.consultarComSeletor(this.seletor).subscribe(
       resultado => {
         this.inquilinos = resultado;
@@ -40,7 +51,7 @@ export class InquilinoListagemComponent implements OnInit {
   }
 
   alterar(inquilinoSelecionado: Inquilino) {
-    this.router.navigate(['/inquilino/detalhe/' + inquilinoSelecionado.id]);
+    this.router.navigate(['/home/inquilino/detalhe/' + inquilinoSelecionado.id]);
   }
 
   excluir(inquilinoSelecionado: Inquilino) {

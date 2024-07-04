@@ -8,4 +8,5 @@ export class EnderecoSeletor extends BaseSeletor{
   cidade: string;
   estado: string;
   pais: string;
+  idAnfitriao: number
 }

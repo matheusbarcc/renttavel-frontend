@@ -1,3 +1,5 @@
+import { Anfitriao } from "./anfitriao"
+
 export class Endereco{
   id: number
   numero: number
@@ -6,7 +8,8 @@ export class Endereco{
   bairro: string
   cidade: string
   estado: string
-  pais: string="BR"
+  pais: string = "BR"
+  anfitriao: Anfitriao
 }
 
 

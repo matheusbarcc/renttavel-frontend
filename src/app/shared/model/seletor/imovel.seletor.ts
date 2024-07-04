@@ -9,4 +9,5 @@ export class ImovelSeletor extends BaseSeletor{
   qtdBanheiro: number;
   isOcupado: boolean;
   idEndereco: number;
+  idAnfitriao: number;
 }

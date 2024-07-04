@@ -10,7 +10,7 @@ import { InquilinoSeletor } from '../model/seletor/inquilino';
 })
 export class InquilinoService {
 
-  private readonly API = 'http://localhost:8080/renttavel-backend/rest/inquilino';
+  private readonly API = 'http://localhost:8080/renttavel-backend/rest/restrito/inquilino';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -36,6 +36,10 @@ export class InquilinoService {
 
   consultarComSeletor(seletor: InquilinoSeletor): Observable<Array<Inquilino>> {
     return this.httpClient.post<Array<Inquilino>>(this.API + '/filtro', seletor);
+  }
+
+  consultarPorAnfitriao(idAnfitriao: number): Observable<Array<Inquilino>>{
+    return this.httpClient.get<Array<Inquilino>>(this.API + '/anfitriao/' + idAnfitriao)
   }
 
   contarRegistros(seletor: InquilinoSeletor): Observable<number> {

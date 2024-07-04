@@ -1,21 +1,13 @@
 import { Routes } from '@angular/router';
-import { AluguelModule } from './aluguel/aluguel.module';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'imovel',
-    loadChildren:() => import('./imovel/imovel.module').then(m => m.ImovelModule),
+    path: 'home',
+    loadChildren:() => import('./home/home.module').then(m => m.HomeModule),
   },
   {
-    path: 'aluguel',
-    loadChildren:() => import('./aluguel/aluguel.module').then(m => m.AluguelModule),
-  },
-  {
-    path: 'endereco',
-    loadChildren:() => import('./endereco/endereco.module').then(m => m.EnderecoModule),
-  },
-  {
-    path: 'inquilino',
-    loadChildren:() => import('./inquilino/inquilino.module').then(m => m.InquilinoModule),
+    path: 'login',
+    loadChildren:() => import('./login/login.module').then(m => m.LoginModule),
   },
 ];

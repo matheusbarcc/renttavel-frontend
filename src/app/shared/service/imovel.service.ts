@@ -9,7 +9,7 @@ import { ImovelSeletor } from '../model/seletor/imovel.seletor';
 })
 export class ImovelService {
 
-  private readonly API = 'http://localhost:8080/renttavel-backend/rest/imovel';
+  private readonly API = 'http://localhost:8080/renttavel-backend/rest/restrito/imovel';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -35,6 +35,10 @@ export class ImovelService {
 
   consultarComSeletor(seletor: ImovelSeletor): Observable<Array<Imovel>>{
     return this.httpClient.post<Array<Imovel>>(this.API + '/filtro', seletor)
+  }
+
+  consultarPorAnfitriao(idAnfitriao: number): Observable<Array<Imovel>>{
+    return this.httpClient.get<Array<Imovel>>(this.API + '/anfitriao/' + idAnfitriao)
   }
 
   contarRegistros(seletor: ImovelSeletor): Observable<number>{

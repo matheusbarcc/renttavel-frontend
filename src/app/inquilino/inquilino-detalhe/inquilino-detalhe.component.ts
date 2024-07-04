@@ -1,8 +1,9 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { Inquilino } from '../../shared/model/inquilino';
 import { InquilinoService } from '../../shared/service/inquilino.service';
+import { Anfitriao } from '../../shared/model/anfitriao';
 
 
 @Component({
@@ -14,17 +15,36 @@ import { InquilinoService } from '../../shared/service/inquilino.service';
 export class InquilinoDetalheComponent implements OnInit {
 
   public inquilino: Inquilino = new Inquilino();
+  public anfitriao: Anfitriao = new Anfitriao()
   public idInquilino: number;
+  public idAnfitriaoHeader: number;
 
   constructor(
     private inquilinoService: InquilinoService,
     private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2
-  ) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader();
+    this.setAnfitriaoImovel();
     this.verificarId();
+  }
+
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
+  }
+
+  setAnfitriaoImovel() {
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if (usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.anfitriao = usuario; // Define o anfitrião como o usuário autenticado
+      this.inquilino.anfitriao = this.anfitriao; // Define o anfitrião do imóvel
+    }
   }
 
   verificarId() {
@@ -93,7 +113,7 @@ export class InquilinoDetalheComponent implements OnInit {
   }
 
   voltar(): void {
-    this.router.navigate(['/inquilino']);
+    this.router.navigate(['/home/inquilino']);
   }
 
   consultarPorId() {

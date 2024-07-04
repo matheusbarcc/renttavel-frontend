@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Endereco } from '../../shared/model/endereco';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
+import { Anfitriao } from '../../shared/model/anfitriao';
 
 @Component({
   selector: 'app-endereco-detalhe',
@@ -12,8 +13,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EnderecoDetalheComponent implements OnInit {
   public endereco: Endereco = new Endereco();
+  public anfitriao: Anfitriao = new Anfitriao()
   public enderecos: Endereco[] = [];
   public idEndereco: number;
+  public idAnfitriaoHeader: number;
 
   constructor(
     private enderecoService: EnderecoService,
@@ -23,7 +26,26 @@ export class EnderecoDetalheComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader();
+    this.setAnfitriaoImovel();
     this.verificarId();
+  }
+
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
+  }
+
+  setAnfitriaoImovel() {
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if (usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.anfitriao = usuario; // Define o anfitrião como o usuário autenticado
+      this.endereco.anfitriao = this.anfitriao; // Define o anfitrião do imóvel
+    }
   }
 
   verificarId() {
@@ -101,7 +123,7 @@ export class EnderecoDetalheComponent implements OnInit {
   }
 
   voltar(): void {
-    this.router.navigate(['/endereco'])
+    this.router.navigate(['/home/endereco'])
   }
 
   buscarCEP() {

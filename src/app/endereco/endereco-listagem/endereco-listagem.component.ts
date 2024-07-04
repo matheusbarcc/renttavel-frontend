@@ -21,15 +21,26 @@ export class EnderecoListagemComponent implements OnInit {
   public totalPaginas: number;
   public totalRegistros: number;
   public offset: number;
+  public idAnfitriaoHeader: number;
 
   constructor(private enderecoService: EnderecoService,
               private router: Router) {}
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader()
     this.pesquisar();
   }
 
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
+  }
+
   pesquisar() {
+    this.seletor.idAnfitriao = this.idAnfitriaoHeader;
     this.enderecoService.consultarComSeletor(this.seletor).subscribe(
       resultado => {
         this.enderecos = resultado;
@@ -43,7 +54,7 @@ export class EnderecoListagemComponent implements OnInit {
   }
 
   alterar(enderecoSelecionado: Endereco) {
-    this.router.navigate(['/endereco/detalhe/' + enderecoSelecionado.id]);
+    this.router.navigate(['/home/endereco/detalhe/' + enderecoSelecionado.id]);
   }
 
   excluir(enderecoSelecionado: Endereco) {

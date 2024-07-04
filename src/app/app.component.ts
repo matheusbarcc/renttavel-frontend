@@ -14,15 +14,4 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'renttavel-frontend';
-
-  isImoveisDropdownOpen = false;
-  isAlugueisDropdownOpen = false;
-  isEnderecosDropdownOpen = false;
-  isInquilinosDropdownOpen = false;
-
-  [key: string]: any;
-
-  toggleDropdown(dropdown: string) {
-    this[dropdown] = !this[dropdown];
-  }
 }

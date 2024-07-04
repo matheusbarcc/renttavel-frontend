@@ -34,6 +34,7 @@ export class AluguelListagemComponent implements OnInit{
   public totalPaginas: number;
   public totalRegistros: number;
   public offset: number;
+  public idAnfitriaoHeader: number;
 
   constructor(private aluguelService: AluguelService,
               private imovelService: ImovelService,
@@ -41,9 +42,18 @@ export class AluguelListagemComponent implements OnInit{
               private router: Router){}
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader();
     this.pesquisar();
-    this.consultarTodosImoveis();
-    this.consultarTodosInquilino();
+    this.consultarImoveis();
+    this.consultarInquilinos();
+  }
+
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
   }
 
   clicadoEPreenchido(clicked: boolean, checkout: Date, a: Aluguel ){
@@ -85,6 +95,7 @@ export class AluguelListagemComponent implements OnInit{
   }
 
   pesquisar(){
+    this.seletor.idAnfitriao = this.idAnfitriaoHeader;
     this.aluguelService.consultarComSeletor(this.seletor).subscribe(
       resultado => {
         this.alugueis = resultado;
@@ -98,7 +109,7 @@ export class AluguelListagemComponent implements OnInit{
   }
 
   alterar(aluguelSelecionado: Aluguel){
-    this.router.navigate(['/aluguel/detalhe/'+ aluguelSelecionado.id])
+    this.router.navigate(['/home/aluguel/detalhe/'+ aluguelSelecionado.id])
   }
 
   efetivarCheckout(aluguelSelecionado: Aluguel) {
@@ -213,8 +224,8 @@ export class AluguelListagemComponent implements OnInit{
     )
   }
 
-  consultarTodosImoveis(){
-    this.imovelService.consultarTodos().subscribe(
+  consultarImoveis(){
+    this.imovelService.consultarPorAnfitriao(this.idAnfitriaoHeader).subscribe(
       resultado => {
         this.imoveis = resultado
       },
@@ -224,8 +235,8 @@ export class AluguelListagemComponent implements OnInit{
     )
   }
 
-  consultarTodosInquilino(){
-    this.inquilinoService.consultarTodos().subscribe(
+  consultarInquilinos(){
+    this.inquilinoService.consultarPorAnfitriao(this.idAnfitriaoHeader).subscribe(
       resultado => {
         this.inquilinos = resultado
       },

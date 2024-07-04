@@ -111,7 +111,8 @@
           <div class="flex flex-col gap-y-2 col-span-2">
             <label class="truncate" for="valorTotal"><b>Valor Total</b></label>
             <div class="flex items-center text-lg justify-center border-2 border-rentlaranja py-8 rounded-xl shadow-md">
-              <span>R$ {{ aluguel.valorTotal }}</span>
+              <span *ngIf="aluguel.valorTotal" >R$ {{ aluguel.valorTotal }}</span>
+              <span *ngIf="!aluguel.valorTotal" >R$ 0</span>
             </div>
           </div>
         </div>

@@ -21,17 +21,28 @@ export class ImovelListagemComponent implements OnInit{
   public totalPaginas: number;
   public totalRegistros: number;
   public offset: number;
+  public idAnfitriaoHeader: number;
 
   constructor(private imovelService: ImovelService,
               private enderecoService: EnderecoService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.getIdAnfitriaoHeader()
     this.pesquisar()
-    this.consultarTodosEnderecos()
+    this.consultarEnderecos()
+  }
+
+  getIdAnfitriaoHeader(){
+    const usuarioAutenticado = localStorage.getItem('usuarioAutenticado');
+    if(usuarioAutenticado) {
+      const usuario = JSON.parse(usuarioAutenticado);
+      this.idAnfitriaoHeader = usuario.id
+    }
   }
 
   pesquisar(){
+    this.seletor.idAnfitriao = this.idAnfitriaoHeader;
     this.imovelService.consultarComSeletor(this.seletor).subscribe(
       resultado => {
         this.imoveis = resultado
@@ -45,7 +56,7 @@ export class ImovelListagemComponent implements OnInit{
   }
 
   alterar(imovelSelecionado: Imovel){
-    this.router.navigate(['/imovel/detalhe/'+ imovelSelecionado.id])
+    this.router.navigate(['/home/imovel/detalhe/'+ imovelSelecionado.id])
   }
 
   excluir(imovelSelecionado: Imovel){
@@ -110,9 +121,8 @@ export class ImovelListagemComponent implements OnInit{
     )
   }
 
-
-  consultarTodosEnderecos(){
-    this.enderecoService.consultarTodos().subscribe(
+  consultarEnderecos(){
+    this.enderecoService.consultarPorAnfitriao(this.idAnfitriaoHeader).subscribe(
       resultado => {
         this.enderecos = resultado
       },
@@ -122,7 +132,6 @@ export class ImovelListagemComponent implements OnInit{
     )
   }
 
-
   abrirFiltros(): void {
     this.isModalOpen = true;
   }
@@ -130,5 +139,4 @@ export class ImovelListagemComponent implements OnInit{
   fecharFiltros(): void {
     this.isModalOpen = false;
   }
-
 }

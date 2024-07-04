@@ -1,3 +1,4 @@
+import { Anfitriao } from "./anfitriao"
 import { Imovel } from "./imovel"
 import { Inquilino } from "./inquilino"
 
@@ -13,4 +14,5 @@ export class Aluguel{
   qtdDias: number = 0
   imovel: Imovel
   inquilino: Inquilino
+  anfitriao: Anfitriao
 }

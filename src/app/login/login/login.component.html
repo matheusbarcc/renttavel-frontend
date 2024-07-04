@@ -1,7 +1,34 @@
-<label for="email">Email:</label>
-<input type="text" name="email" [(ngModel)]="dto.email" class="border">
-<br>
-<label for="senha">Senha:</label>
-<input type="text" name="senha" [(ngModel)]="dto.senha" class="border">
-<br>
-<button (click)="realizarLogin()" class="border">Login</button>
+<img src="https://i.imgur.com/CnDyUUy.png" alt="" class="absolute -bottom-16 left-28 scale-75">
+<img src="https://i.imgur.com/AOlhy0n.png" alt="" class="absolute -top-44 right-6 scale-50">
+<form (ngSubmit)="realizarLogin()" #form="ngForm">
+  <div class="flex items-center justify-center min-h-screen absolute inset-0">
+    <div class="flex flex-col justify-center items-center w-3/12 gap-10 border py-11 rounded-2xl shadow-xl backdrop-filter backdrop-blur-lg bg-opacity-50">
+      <div>
+        <img src="https://i.imgur.com/veLys9v.png" alt="Logo Renttavel" class="ml-5 w-61 h-14">
+      </div>
+      <div class="flex flex-col gap-1 text-center">
+        <h1 class="text-3xl font-semibold text-rentazul">Login</h1>
+        <h2 class="text-base font-light text-rentcinza">Bem-vindo(a) novamente!</h2>
+      </div>
+      <div class="flex flex-col gap-3 w-2/3">
+        <div class="relative z-0 w-full group">
+          <input [(ngModel)]="dto.email" type="email" name="floating_email" id="floating_email" class="block py-3 px-3 w-full text-sm text-gray-900 bg-transparent border border-rentcinza appearance-none focus:border-2 focus:outline-none focus:ring-0 focus:border-rentlaranja peer rounded-lg" placeholder=" " required />
+          <label for="floating_email" class="ml-2 px-2 peer-focus:font-medium absolute text-sm text-rentcinza duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-rentlaranja peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6 bg-rentbranco">Email</label>
+        </div>
+        <div class="relative z-0 w-full group">
+          <input [(ngModel)]="dto.senha" type="senha" name="floating_email" id="floating_email" class="block py-3 px-3 w-full text-sm text-gray-900 bg-transparent border border-rentcinza appearance-none focus:border-2 focus:outline-none focus:ring-0 focus:border-rentlaranja peer rounded-lg" placeholder=" " required />
+          <label for="floating_senha" class="ml-2 px-2 peer-focus:font-medium absolute text-sm text-rentcinza duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-rentlaranja peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6 bg-rentbranco">Senha</label>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center w-2/3 gap-3">
+        <button type="submit" class="w-full bg-rentlaranja text-rentbranco text-xl font-bold py-4 rounded-xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg">Login</button>
+        <div class="flex items-center gap-2">
+          <div class="h-px w-full bg-rentcinza"></div>
+          <p class="text-rentcinza text-xl font-semibold">ou</p>
+          <div class="h-px w-full bg-rentcinza"></div>
+        </div>
+        <button (click)="cadastrar()" class="w-full border-2 border-rentlaranja bg-rentbranco text-rentlaranja text-xl font-semibold py-4 rounded-xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg">Cadastrar-se</button>
+      </div>
+    </div>
+  </div>
+</form>

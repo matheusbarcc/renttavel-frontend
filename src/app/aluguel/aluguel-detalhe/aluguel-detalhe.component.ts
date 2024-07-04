@@ -8,6 +8,7 @@ import { Imovel } from '../../shared/model/imovel';
 import { Inquilino } from '../../shared/model/inquilino';
 import { InquilinoService } from '../../shared/service/inquilino.service';
 import { Anfitriao } from '../../shared/model/anfitriao';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -87,12 +88,17 @@ export class AluguelDetalheComponent implements OnInit {
     })
   }
 
-  salvar(): void {
-    if (this.idAluguel) {
-      this.alterar();
+  salvar(form: NgForm): void {
+    if(form.valid){
+      if (this.idAluguel) {
+        this.alterar();
+      } else {
+        this.inserir();
+      }
     } else {
-      this.inserir();
+      Swal.fire('Preencha todos os campos obrigatorios', '', 'error')
     }
+
   }
 
   consultarPorId() {

@@ -15,7 +15,7 @@ import { Anfitriao } from '../../shared/model/anfitriao';
 })
 export class HomeComponent implements OnInit{
 
-  public anfAutenticado = Anfitriao;
+  public anfAutenticado: Anfitriao = new Anfitriao();
 
   isImoveisDropdownOpen = false;
   isAlugueisDropdownOpen = false;
@@ -37,6 +37,10 @@ export class HomeComponent implements OnInit{
 
   [key: string]: any;
   toggleDropdown(dropdown: string) {
+    this.isImoveisDropdownOpen = false;
+    this.isAlugueisDropdownOpen = false;
+    this.isEnderecosDropdownOpen = false;
+    this.isInquilinosDropdownOpen = false;
     this[dropdown] = !this[dropdown];
   }
 

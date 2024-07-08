@@ -5,7 +5,6 @@ import { Inquilino } from '../../shared/model/inquilino';
 import { InquilinoService } from '../../shared/service/inquilino.service';
 import { Anfitriao } from '../../shared/model/anfitriao';
 
-
 @Component({
   selector: 'app-inquilino-detalhe',
   templateUrl: './inquilino-detalhe.component.html',
@@ -57,6 +56,18 @@ export class InquilinoDetalheComponent implements OnInit {
   }
 
   salvar(): void {
+    // Validação dos campos obrigatórios
+    if (!this.inquilino.nome || !this.inquilino.email) {
+      Swal.fire({
+        title: "Erro",
+        text: "Por favor, preencha todos os campos obrigatórios.",
+        icon: "error",
+        showConfirmButton: true,
+        confirmButtonColor: "#ff914d"
+      });
+      return;
+    }
+
     if (this.idInquilino) {
       this.alterar();
     } else {

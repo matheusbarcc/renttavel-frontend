@@ -21,7 +21,20 @@ export class CadastroComponent implements OnInit{
     this.anfitriao.perfilAcesso = "ANFITRIAO";
   }
 
-  salvar(){
+  salvar(): void {
+    // Validação dos campos obrigatórios
+    if (!this.anfitriao.nome || !this.anfitriao.email || !this.anfitriao.senha) {
+      Swal.fire({
+        title: "Erro",
+        text: "Por favor, preencha todos os campos obrigatórios.",
+        icon: "error",
+        showConfirmButton: true,
+        confirmButtonColor: "#ff914d"
+      });
+      return;
+    }
+
+    // Chamada ao serviço para salvar o anfitrião
     this.anfitriaoService.salvar(this.anfitriao).subscribe(
       resultado => {
         Swal.fire({
@@ -30,19 +43,19 @@ export class CadastroComponent implements OnInit{
           icon: "success",
           showConfirmButton: true,
           confirmButtonColor: "#ff914d"
-        })
+        });
         this.voltar();
       },
       erro => {
         Swal.fire({
-          title: "Erro realizar cadastro",
+          title: "Erro ao realizar cadastro",
           html: erro.error.mensagem,
           icon: "error",
           showConfirmButton: true,
           confirmButtonColor: "#ff914d"
-        })
+        });
       }
-    )
+    );
   }
 
   voltar(): void{

@@ -4,6 +4,7 @@ import { AluguelRoutingModule } from './aluguel-routing.module';
 import { AluguelListagemComponent } from './aluguel-listagem/aluguel-listagem.component';
 import { AluguelDetalheComponent } from './aluguel-detalhe/aluguel-detalhe.component';
 import { FormsModule } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -15,6 +16,11 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AluguelRoutingModule,
     FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [
+    provideNgxMask()
   ]
 })
 export class AluguelModule { }

@@ -96,7 +96,7 @@ export class AluguelDetalheComponent implements OnInit {
         this.inserir();
       }
     } else {
-      Swal.fire('Preencha todos os campos obrigatorios', '', 'error')
+      Swal.fire('Preencha o(s) campo(s) obrigatórios', '', 'error')
     }
 
   }

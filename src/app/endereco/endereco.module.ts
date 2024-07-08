@@ -5,6 +5,7 @@ import { EnderecoRoutingModule } from './endereco-routing.module';
 import { EnderecoListagemComponent } from './endereco-listagem/endereco-listagem.component';
 import { EnderecoDetalheComponent } from './endereco-detalhe/endereco-detalhe.component';
 import { FormsModule } from '@angular/forms';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -16,6 +17,11 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     EnderecoRoutingModule,
     FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [
+    provideNgxMask()
   ]
 })
 export class EnderecoModule { }

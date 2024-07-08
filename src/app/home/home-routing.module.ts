@@ -7,6 +7,10 @@ const routes: Routes = [
 
     children: [
       {
+        path: 'dashboard',
+        loadChildren:() => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
         path: 'imovel',
         loadChildren:() => import('../imovel/imovel.module').then(m => m.ImovelModule)
       },

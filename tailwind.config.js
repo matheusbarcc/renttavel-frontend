@@ -10,6 +10,7 @@ module.exports = {
       'rentazul': '#011e44',
       'rentbranco': '#ffffff',
       'rentcinza': '#cccccc',
+      'rentcinza2': '#d8e1e3',
       'rentpreto': '#000000'
     },
     extend: {

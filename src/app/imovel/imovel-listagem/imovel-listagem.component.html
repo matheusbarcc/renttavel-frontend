@@ -106,39 +106,41 @@
       <div class="flex flex-col gap-y-3 text-rentazul">
         <b><h3 class=" text-xl">Tipo do imóvel</h3></b>
         <div class="flex justify-start gap-x-5">
-          <input type="checkbox" name="tipo" [(ngModel)]="seletor.tipo" value=1 class="hidden" id="tipoCasa">
+          <input type="checkbox" name="tipo" value="1" id="tipoCasa" (change)="onCheckboxChange($event)" class="hidden">
           <label for="tipoCasa" class="form-control flex flex-col border flex-1 px-4 py-3 gap-y-6 rounded-2xl hover:cursor-pointer select-none"
-                                [ngClass]="{
-                                  'border-rentazul': seletor.tipo == 1,
-                                  'shadow-lg': seletor.tipo == 1,
-                                  'ring-rentazul': seletor.tipo == 1,
-                                  'ring-2': seletor.tipo == 1,
-                                  'border-rentcinza': seletor.tipo != 1,
-                                  }">
+            [ngClass]="{
+              'border-rentazul': seletor.tipos.includes(1),
+              'shadow-lg': seletor.tipos.includes(1),
+              'ring-rentazul': seletor.tipos.includes(1),
+              'ring-2': seletor.tipos.includes(1),
+              'border-rentcinza': !seletor.tipos.includes(1)
+            }">
             <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/home--v1.png" alt="home--v1"/>
             <span class="ml-1 text-lg">Casa</span>
           </label>
-          <input type="checkbox" name="tipo" [(ngModel)]="seletor.tipo" value="2" class="hidden" id="tipoApartamento">
+
+          <input type="checkbox" name="tipo" value="2" class="hidden" id="tipoApartamento" (change)="onCheckboxChange($event)">
           <label for="tipoApartamento" class="form-control flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-6 rounded-2xl hover:cursor-pointer select-none"
-                                        [ngClass]="{
-                                          'border-rentazul': seletor.tipo == 2,
-                                          'shadow-md': seletor.tipo == 2,
-                                          'ring-rentazul': seletor.tipo == 2,
-                                          'ring-2': seletor.tipo == 2,
-                                          'border-rentcinza': seletor.tipo != 2,
-                                          }">
+            [ngClass]="{
+              'border-rentazul': seletor.tipos.includes(2),
+              'shadow-md': seletor.tipos.includes(2),
+              'ring-rentazul': seletor.tipos.includes(2),
+              'ring-2': seletor.tipos.includes(2),
+              'border-rentcinza': !seletor.tipos.includes(2)
+            }">
             <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/apartment.png" alt="apartment"/>
             <span class="ml-1 text-lg">Apartamento</span>
           </label>
-          <input type="checkbox" name="tipo" [(ngModel)]="seletor.tipo" value="3" class="hidden" id="tipoUnidadeSecundaria">
+
+          <input type="checkbox" name="tipo" value="3" class="hidden" id="tipoUnidadeSecundaria" (change)="onCheckboxChange($event)"s>
           <label for="tipoUnidadeSecundaria" class="form-control flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-2 rounded-2xl hover:cursor-pointer select-none"
-                                              [ngClass]="{
-                                                'border-rentazul': seletor.tipo == 3,
-                                                'shadow-md': seletor.tipo == 3,
-                                                'ring-rentazul': seletor.tipo == 3,
-                                                'ring-2': seletor.tipo == 3,
-                                                'border-rentcinza': seletor.tipo != 3,
-                                                }">
+            [ngClass]="{
+              'border-rentazul': seletor.tipos.includes(3),
+              'shadow-md': seletor.tipos.includes(3),
+              'ring-rentazul': seletor.tipos.includes(3),
+              'ring-2': seletor.tipos.includes(3),
+              'border-rentcinza': !seletor.tipos.includes(3)
+            }">
             <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/real-estate.png" alt="real-estate"/>
             <div>
               <span class="flex ml-1 items-start text-base">Unidade</span>
@@ -146,6 +148,7 @@
             </div>
           </label>
         </div>
+
       </div>
       <div class="text-rentazul text-xl">
         <div class="flex flex-col gap-y-3 text-rentazul">

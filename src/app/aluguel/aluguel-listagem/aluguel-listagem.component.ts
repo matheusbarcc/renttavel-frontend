@@ -122,6 +122,7 @@ export class AluguelListagemComponent implements OnInit{
           showConfirmButton: true,
           confirmButtonColor: "#ff914d"
         })
+        window.location.reload();
       },
       erro => {
         Swal.fire({

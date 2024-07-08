@@ -23,7 +23,7 @@ export class LoginComponent {
       (anfAutenticado: Anfitriao) => {
         if(anfAutenticado.idSessao){
           localStorage.setItem('usuarioAutenticado', JSON.stringify(anfAutenticado));
-          this.router.navigate(['/home'])
+          this.router.navigate(['/home/dashboard'])
         }
       },
       (erro) => {

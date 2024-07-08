@@ -3,6 +3,7 @@ import { DashboardService } from '../../shared/service/dashboard.service';
 import { Anfitriao } from '../../shared/model/anfitriao';
 import { DiferencaDTO } from '../../shared/model/dto/diferenca.dto';
 import { Aluguel } from '../../shared/model/aluguel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,17 +22,15 @@ export class DashboardComponent implements OnInit{
   public dadosGraficoBarra: any;
   public datasetGraficoBarra: any;
   public labelsGraficoBarra: any;
-  public temAluguel: number = 2;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.chainedRequests();
   }
 
   async chainedRequests() {
-    await this.delay(100);
-    this.iniciarGraficoBarra();
     await this.delay(10);
     this.getAnfitriaoHeader();
     await this.delay(10);
@@ -50,6 +49,8 @@ export class DashboardComponent implements OnInit{
     this.getLabelsGraficoBarra();
     await this.delay(10);
     this.getDatasetsGraficoBarra();
+    await this.delay(100);
+    this.iniciarGraficoBarra();
   }
 
   delay(ms: number) {
@@ -93,9 +94,6 @@ export class DashboardComponent implements OnInit{
   getDatasetsGraficoBarra(){
     this.dashboardService.getDatasetsGraficoBarra(this.idAnfitriaoHeader).subscribe(
       resultado => {
-        if(resultado.length == 0){
-          this.temAluguel = 2;
-        }
         this.datasetGraficoBarra = resultado;
       },
       erro => {
@@ -114,7 +112,6 @@ export class DashboardComponent implements OnInit{
       }
     )
   }
-
 
   formatarRendimentoAnual(): string {
     let rendimentoFormatado = null;
@@ -192,5 +189,9 @@ export class DashboardComponent implements OnInit{
         console.log('Erro ao calcular diferenca', erro.error.mensagem)
       }
     )
+  }
+
+  verAlugueis(){
+    this.router.navigate(['/home/aluguel/'])
   }
 }

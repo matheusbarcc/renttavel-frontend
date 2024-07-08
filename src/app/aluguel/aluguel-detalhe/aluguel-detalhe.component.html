@@ -29,15 +29,19 @@
             <input [(ngModel)]="aluguel.dataCheckoutPrevisto" name="dataCheckoutPrevisto" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local" required
               (change)="calcularQtdDias()" (change)="calcularValorTotal()"
               [ngClass]="{
-                'border-red-500 ring-2 ring-red-500 ring-inset': (form.submitted && !aluguel.dataCheckoutPrevisto) || (form.submitted && !aluguel.qtdDias)
+                'border-red-500 ring-2 ring-red-500 ring-inset': (form.submitted && !aluguel.dataCheckoutPrevisto) || (form.submitted && !aluguel.qtdDias && !aluguel.dataCheckoutEfetivo)
               }">
             <div *ngIf="form.submitted && !aluguel.dataCheckoutPrevisto"  class="text-red-600 text-sm">Campo obrigatório.</div>
-            <div *ngIf="form.submitted && aluguel.dataCheckoutPrevisto != null && !aluguel.qtdDias"  class="text-red-600 text-sm">Data Inválida.</div>
+            <div *ngIf="form.submitted && aluguel.dataCheckoutPrevisto != null && !aluguel.dataCheckoutEfetivo && !aluguel.qtdDias"  class="text-red-600 text-sm">Data Inválida.</div>
           </div>
           <div class="flex flex-col gap-y-2">
             <label class="truncate" for="dataCheckoutEfetivo"><b>Checkout Efetivo</b></label>
             <input [(ngModel)]="aluguel.dataCheckoutEfetivo" name="dataCheckoutEfetivo" class="form-control border border-rentcinza rounded-xl py-3 text-center text-sm focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="datetime-local"
-              (change)="calcularQtdDias()" (change)="calcularValorTotal()">
+              (change)="calcularQtdDias()" (change)="calcularValorTotal()"
+              [ngClass]="{
+                'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.qtdDias && aluguel.dataCheckoutEfetivo
+              }">
+              <div *ngIf="form.submitted && aluguel.dataCheckoutEfetivo && !aluguel.qtdDias"  class="text-red-600 text-sm">Data Inválida.</div>
           </div>
         </div>
         <div class="grid grid-cols-3 gap-x-5 gap-y-5 text-rentazul text-xl">
@@ -45,7 +49,7 @@
             <label class="truncate" for="valorDiaria"><b>Diária</b></label>
             <div class="flex justify-between items-center border border-rentcinza rounded-xl pl-4">
               <span class="flex items-center h-full text-base text-rentcinza select-none">R$</span>
-              <input maxlength="99999999,99" [(ngModel)]="aluguel.valorDiaria" name="valorDiaria" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="0,00" required (blur)="calcularValorTotal()"
+              <input maxlength="99999999,99" min="0" [(ngModel)]="aluguel.valorDiaria" name="valorDiaria" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="0,00" required (blur)="calcularValorTotal()"
               [ngClass]="{
                 'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.valorDiaria
               }">
@@ -56,7 +60,7 @@
             <label class="truncate" for="valorLimpeza"><b>Limpeza</b></label>
             <div class="flex justify-between items-center border border-rentcinza rounded-xl pl-4">
               <span class="flex items-center h-full text-base text-rentcinza select-none">R$</span>
-              <input [(ngModel)]="aluguel.valorLimpeza" name="valorLimpeza" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="0,00" required (blur)="calcularValorTotal()"
+              <input maxlength="99999999,99" min="0" [(ngModel)]="aluguel.valorLimpeza" name="valorLimpeza" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="0,00" required (blur)="calcularValorTotal()"
               [ngClass]="{
                 'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.valorLimpeza
               }">
@@ -67,7 +71,7 @@
             <label class="truncate" for="valorMulta"><b>Multa</b></label>
             <div class="flex justify-between items-center border border-rentcinza rounded-xl pl-4">
               <span class="flex items-center h-full text-base text-rentcinza select-none">R$</span>
-              <input [(ngModel)]="aluguel.valorMulta" name="valorMulta" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="R$ 0,00" (blur)="calcularValorTotal()">
+              <input maxlength="99999999,99" min="0" max="99999999" [(ngModel)]="aluguel.valorMulta" name="valorMulta" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="R$ 0,00" (blur)="calcularValorTotal()">
             </div>
           </div>
         </div>

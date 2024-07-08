@@ -41,6 +41,36 @@ export class ImovelListagemComponent implements OnInit{
     }
   }
 
+  onCheckboxChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    const value = Number(checkbox.value);
+
+    // Certificar-se de que `seletor.tipo` está definido
+    if (!this.seletor.tipos) {
+      this.seletor.tipos = [];
+    }
+
+    if (checkbox.checked) {
+      if (!this.seletor.tipos.includes(value)) {
+        this.seletor.tipos.push(value);
+      }
+    } else {
+      const index = this.seletor.tipos.indexOf(value);
+      if (index > -1) {
+        this.seletor.tipos.splice(index, 1);
+      }
+    }
+  }
+
+  onTipoChange(event: any, value: number) {
+    const index = this.seletor.tipos.indexOf(value);
+    if (index === -1) {
+      this.seletor.tipos.push(value);
+    } else {
+      this.seletor.tipos.splice(index, 1);
+    }
+  }
+
   pesquisar(){
     this.seletor.idAnfitriao = this.idAnfitriaoHeader;
     this.imovelService.consultarComSeletor(this.seletor).subscribe(

@@ -247,7 +247,11 @@ export class AluguelListagemComponent implements OnInit{
   }
 
   alterarImovel(imovelSelecionado: Imovel){
-    this.router.navigate(['/imovel/detalhe/'+ imovelSelecionado.id])
+    this.router.navigate(['/home/imovel/detalhe/'+ imovelSelecionado.id])
+  }
+
+  alterarInquilino(inquilinoSelecionado: Inquilino){
+    this.router.navigate(['/home/inquilino/detalhe/'+ inquilinoSelecionado.id])
   }
 
   openModalFiltros(): void{

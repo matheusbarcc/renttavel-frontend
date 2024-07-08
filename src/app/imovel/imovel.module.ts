@@ -14,7 +14,7 @@ import { ImovelDetalheComponent } from './imovel-detalhe/imovel-detalhe.componen
   imports: [
     CommonModule,
     ImovelRoutingModule,
-    FormsModule,
+    FormsModule
   ],
 })
 export class ImovelModule { }

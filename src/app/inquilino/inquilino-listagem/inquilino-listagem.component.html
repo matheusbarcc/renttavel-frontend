@@ -137,7 +137,7 @@
         </div>
         <div>
           <h3 class="text-lg text-rentazul mb-2"><b>Telefone</b></h3>
-          <p class="truncate">{{ inquilino.telefone }}</p>
+          <p class="truncate">{{ inquilino.telefone | mask: '(00) 0 0000-0000' }}</p>
         </div>
         <div class="flex gap-2">
           <button

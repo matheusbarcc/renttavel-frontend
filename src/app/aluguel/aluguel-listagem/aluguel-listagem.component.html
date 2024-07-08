@@ -3,7 +3,7 @@
   <!-- Titulo e Logo -->
   <div class="flex items-center justify-between flex-start pt-10 px-32">
     <h1 class="flex items-center gap-5 text-rentazul">
-      <b><span class="text-5xl">Aluguel</span></b>
+      <b><span class="text-5xl">Aluguéis</span></b>
       <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png" alt="forward--v1" />
       <span class="text-4xl">Listagem</span>
     </h1>
@@ -210,7 +210,7 @@
       </div>
       <div class="w-px h-64 bg-rentcinza"></div>
       <div class="flex flex-col w-2/12">
-        <h2 class="text-3xl font-bold">Outros</h2>
+        <h2 class="text-3xl font-bold">Detalhes</h2>
         <div class="flex flex-col my-5 gap-y-5">
           <button
             class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50"
@@ -219,7 +219,8 @@
             <p class="truncate w-11/12">{{ a.imovel.nome }}</p>
           </button>
           <button
-            class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50">
+            class="flex flex-col gap-y-1 text-start col-span-2 border border-rentcinza rounded-md px-4 py-3 hover:bg-slate-50"
+            (click)="alterarInquilino(a.inquilino)">
             <label class="text-xl font-bold">Inquilino</label>
             <p class="truncate">{{ a.inquilino.nome }}</p>
           </button>

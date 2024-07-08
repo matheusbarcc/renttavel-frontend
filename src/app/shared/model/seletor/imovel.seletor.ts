@@ -2,7 +2,7 @@ import { BaseSeletor } from "./base.seletor";
 
 export class ImovelSeletor extends BaseSeletor{
   nome: string;
-  tipo: number;
+  tipos: number[];
   capacidadePessoas: number;
   qtdQuarto: number;
   qtdCama: number;

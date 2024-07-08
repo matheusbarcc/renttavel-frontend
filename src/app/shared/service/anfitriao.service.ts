@@ -15,4 +15,12 @@ export class AnfitriaoService {
   salvar(anfitriao: Anfitriao): Observable<Anfitriao> {
     return this.httpClient.post<Anfitriao>(this.API, anfitriao);
   }
+
+  alterar(anfitriao: Anfitriao): Observable<Anfitriao> {
+    return this.httpClient.put<Anfitriao>(this.API, anfitriao);
+  }
+
+  consultarPorId(id: number): Observable<Anfitriao> {
+    return this.httpClient.get<Anfitriao>(`${this.API}/${id}`);
+  }
 }

@@ -1,0 +1,71 @@
+<div class="flex flex-col gap-8">
+  <!-- Título e Logo -->
+  <div class="flex items-center justify-between pt-10 px-32">
+    <h1 class="flex items-center gap-5 text-rentazul">
+      <b><span class="text-5xl">Perfil</span></b>
+      <img
+        width="20"
+        height="20"
+        src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png"
+        alt="forward--v1"
+      />
+      <span class="text-4xl">Anfitrião</span>
+    </h1>
+    <img
+      src="https://i.imgur.com/brCEmd5.png"
+      alt="Logo Renttavel"
+      class="w-72 h-16"
+    />
+  </div>
+
+  <!-- Detalhes do Anfitrião -->
+  <div class="flex justify-center mb-10">
+    <div
+      class="relative flex flex-col gap-y-4 w-1/3 p-5 bg-white border border-rentcinza rounded-2xl shadow-lg"
+    >
+      <!-- Capa de Perfil -->
+      <div class="relative">
+        <img
+          src="https://i.imgur.com/lFYX31o.png"
+          alt="Capa de perfil"
+          class="w-full h-48 object-cover rounded-t-2xl"
+        />
+        <!-- Foto de Perfil -->
+        <div class="absolute bottom-0 left-4 transform translate-y-4 bg-white rounded-full overflow-hidden border-4 border-white">
+          <img
+            src="https://i.imgur.com/GRjWxGw.png"
+            alt="Foto de perfil"
+            class="w-32 h-32 object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- Nome e Email -->
+      <div>
+        <h2 class="text-2xl text-rentazul truncate">
+          <b>{{ anfitriao.nome }}</b>
+        </h2>
+      </div>
+      <div>
+        <h3 class="text-lg text-rentazul mb-2"><b>Email</b></h3>
+        <p class="truncate">{{ anfitriao.email }}</p>
+      </div>
+
+      <!-- Botão de Editar -->
+      <div class="flex justify-center"> <!-- Centraliza o botão -->
+        <button
+          class="flex items-center justify-center gap-3 text-xl bg-rentlaranja text-rentbranco px-10 h-14 rounded-2xl shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg"
+          (click)="alterar()"
+        >
+          <b>Editar</b>
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/ios-glyphs/30/FFFFFF/edit--v1.png"
+            alt="edit--v1"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

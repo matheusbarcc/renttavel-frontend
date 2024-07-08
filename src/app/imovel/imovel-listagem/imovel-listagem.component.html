@@ -106,7 +106,7 @@
       <div class="flex flex-col gap-y-3 text-rentazul">
         <b><h3 class=" text-xl">Tipo do imóvel</h3></b>
         <div class="flex justify-start gap-x-5">
-          <input type="radio" name="tipo" [(ngModel)]="seletor.tipo" value=1 class="hidden" id="tipoCasa">
+          <input type="checkbox" name="tipo" [(ngModel)]="seletor.tipo" value=1 class="hidden" id="tipoCasa">
           <label for="tipoCasa" class="form-control flex flex-col border flex-1 px-4 py-3 gap-y-6 rounded-2xl hover:cursor-pointer select-none"
                                 [ngClass]="{
                                   'border-rentazul': seletor.tipo == 1,
@@ -118,7 +118,7 @@
             <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/home--v1.png" alt="home--v1"/>
             <span class="ml-1 text-lg">Casa</span>
           </label>
-          <input type="radio" name="tipo" [(ngModel)]="seletor.tipo" value="2" class="hidden" id="tipoApartamento">
+          <input type="checkbox" name="tipo" [(ngModel)]="seletor.tipo" value="2" class="hidden" id="tipoApartamento">
           <label for="tipoApartamento" class="form-control flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-6 rounded-2xl hover:cursor-pointer select-none"
                                         [ngClass]="{
                                           'border-rentazul': seletor.tipo == 2,
@@ -130,7 +130,7 @@
             <img width="40" height="40" src="https://img.icons8.com/fluency-systems-regular/40/021e43/apartment.png" alt="apartment"/>
             <span class="ml-1 text-lg">Apartamento</span>
           </label>
-          <input type="radio" name="tipo" [(ngModel)]="seletor.tipo" value="3" class="hidden" id="tipoUnidadeSecundaria">
+          <input type="checkbox" name="tipo" [(ngModel)]="seletor.tipo" value="3" class="hidden" id="tipoUnidadeSecundaria">
           <label for="tipoUnidadeSecundaria" class="form-control flex flex-col border border-rentcinza flex-1 px-4 py-3 gap-y-2 rounded-2xl hover:cursor-pointer select-none"
                                               [ngClass]="{
                                                 'border-rentazul': seletor.tipo == 3,

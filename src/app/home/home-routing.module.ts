@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'inquilino',
         loadChildren:() => import('../inquilino/inquilino.module').then(m => m.InquilinoModule)
       },
+      {
+        path: 'perfil',
+        loadChildren:() => import('../perfil/perfil.module').then(m => m.PerfilModule),
+      },
     ]
   }
 ];

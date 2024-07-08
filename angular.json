@@ -34,7 +34,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": ["node_modules/chart.js/dist/chart.js"],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {

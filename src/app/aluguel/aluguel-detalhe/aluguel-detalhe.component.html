@@ -4,7 +4,8 @@
     <h1 class="flex items-center gap-5 text-rentazul">
       <b><span class="text-5xl">Aluguéis</span></b>
       <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/021e43/forward--v1.png" alt="forward--v1"/>
-      <span class="text-4xl">Cadastro</span>
+      <span class="text-4xl" *ngIf="!idAluguel" >Cadastro</span>
+      <span class="text-4xl" *ngIf="idAluguel" >Edição</span>
     </h1>
     <img src="https://i.imgur.com/brCEmd5.png" alt="Logo Renttavel" class="w-72 h-16">
   </div>
@@ -44,7 +45,7 @@
             <label class="truncate" for="valorDiaria"><b>Diária</b></label>
             <div class="flex justify-between items-center border border-rentcinza rounded-xl pl-4">
               <span class="flex items-center h-full text-base text-rentcinza select-none">R$</span>
-              <input [(ngModel)]="aluguel.valorDiaria" name="valorDiaria" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="0,00" required (blur)="calcularValorTotal()"
+              <input maxlength="99999999,99" [(ngModel)]="aluguel.valorDiaria" name="valorDiaria" class="form-control w-5/6 rounded-xl py-3 text-center text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="number" step="0.01" placeholder="0,00" required (blur)="calcularValorTotal()"
               [ngClass]="{
                 'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !aluguel.valorDiaria
               }">

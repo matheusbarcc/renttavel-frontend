@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Anfitriao } from '../../shared/model/anfitriao';
 import { AnfitriaoService } from '../../shared/service/anfitriao.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil-detalhe',
@@ -43,31 +44,35 @@ export class PerfilDetalheComponent implements OnInit {
     );
   }
 
-  salvar(): void {
-    if (this.anfitriao) {
-      if (this.anfitriao.id) {
-        this.anfitriaoService.alterar(this.anfitriao).subscribe(
-          () => {
-            Swal.fire('Sucesso!', 'Perfil atualizado com sucesso!', 'success');
-          },
-          (error) => {
-            console.error('Erro ao atualizar perfil', error);
-            Swal.fire('Erro!', 'Ocorreu um erro ao atualizar o perfil.', 'error');
-          }
-        );
+  salvar(form: NgForm): void {
+    if(form.valid ){
+      if (this.anfitriao) {
+        if (this.anfitriao.id) {
+          this.anfitriaoService.alterar(this.anfitriao).subscribe(
+            () => {
+              Swal.fire('Sucesso!', 'Perfil atualizado com sucesso!', 'success');
+            },
+            (error) => {
+              console.error('Erro ao atualizar perfil', error);
+              Swal.fire('Erro!', 'Ocorreu um erro ao atualizar o perfil.', 'error');
+            }
+          );
+        } else {
+          this.anfitriaoService.salvar(this.anfitriao).subscribe(
+            () => {
+              Swal.fire('Sucesso!', 'Perfil criado com sucesso!', 'success');
+            },
+            (error) => {
+              console.error('Erro ao salvar perfil', error);
+              Swal.fire('Erro!', 'Ocorreu um erro ao salvar o perfil.', 'error');
+            }
+          );
+        }
       } else {
-        this.anfitriaoService.salvar(this.anfitriao).subscribe(
-          () => {
-            Swal.fire('Sucesso!', 'Perfil criado com sucesso!', 'success');
-          },
-          (error) => {
-            console.error('Erro ao salvar perfil', error);
-            Swal.fire('Erro!', 'Ocorreu um erro ao salvar o perfil.', 'error');
-          }
-        );
+        Swal.fire('Atenção!', 'Não há perfil para salvar.', 'warning');
       }
     } else {
-      Swal.fire('Atenção!', 'Não há perfil para salvar.', 'warning');
+      Swal.fire('Preencha os campos obrigatórios' , '' , 'error')
     }
   }
 }

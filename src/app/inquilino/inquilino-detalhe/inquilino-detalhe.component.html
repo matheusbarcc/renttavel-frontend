@@ -35,12 +35,8 @@
         <div class="flex flex-col gap-y-3 text-rentazul">
           <div class="flex gap-3 items-center">
             <b><label class="text-xl">Telefone</label></b>
-            <div *ngIf="form.submitted && !inquilino.telefone" class="text-red-600 text-sm">Campo obrigatório.</div>
           </div>
-          <input mask="(00) 0 0000-0000" [(ngModel)]="inquilino.telefone" class="form-input border border-rentcinza rounded-xl py-3 px-3 text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="tel" name="Telefone" placeholder="(xx) xxxxx-xxxx"
-                 [ngClass]="{
-                   'border-red-500 ring-2 ring-red-500 ring-inset': form.submitted && !inquilino.telefone
-                 }">
+          <input mask="(00) 0 0000-0000" [(ngModel)]="inquilino.telefone" class="form-input border border-rentcinza rounded-xl py-3 px-3 text-base focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg" type="tel" name="Telefone" placeholder="(xx) xxxxx-xxxx">
         </div>
         <div class="flex justify-between">
           <button class="flex items-center gap-2 border-2 border-rentlaranja text-lg py-3 px-4 rounded-xl text-rentlaranja font-semibold shadow-md easy-in-out duration-100 hover:scale-105 hover:shadow-lg" (click)="voltar()">

@@ -42,15 +42,17 @@
 
   <!-- Formulário de Edição -->
   <div class="flex justify-center mb-10">
-    <form (ngSubmit)="salvar()" >
+    <form (ngSubmit)="salvar(form)" #form="ngForm">
       <div class="mb-4">
         <label class="block text-rentazul text-lg mb-2" for="nome">Nome</label>
-        <input type="text" id="nome" [(ngModel)]="anfitriao.nome" name="nome"
+        <div *ngIf="form.submitted && !anfitriao.nome" class="text-red-600 text-sm">Campo obrigatório.</div>
+        <input required type="text" id="nome" [(ngModel)]="anfitriao.nome" name="nome"
                class="form-control w-full border border-rentcinza rounded-xl py-3 px-4 focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg"/>
       </div>
       <div class="mb-4">
         <label class="block text-rentazul text-lg mb-2" for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="anfitriao.email" name="email"
+        <div *ngIf="form.submitted && !anfitriao.email" class="text-red-600 text-sm">Campo obrigatório.</div>
+        <input required type="email" id="email" [(ngModel)]="anfitriao.email" name="email"
                class="form-control w-full border border-rentcinza rounded-xl py-3 px-4 focus:outline-none focus:border-rentazul focus:ring-2 focus:ring-rentazul focus:shadow-lg"/>
       </div>
       <!-- <div class="mb-4">

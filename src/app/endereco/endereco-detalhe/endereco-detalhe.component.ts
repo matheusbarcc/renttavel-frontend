@@ -58,6 +58,18 @@ export class EnderecoDetalheComponent implements OnInit {
   }
 
   salvar(): void {
+    // Validação dos campos obrigatórios
+    if (!this.endereco.numero || !this.endereco.cep || !this.endereco.rua || !this.endereco.bairro || !this.endereco.cidade || !this.endereco.estado || !this.endereco.pais) {
+      Swal.fire({
+        title: "Erro",
+        text: "Por favor, preencha todos os campos obrigatórios.",
+        icon: "error",
+        showConfirmButton: true,
+        confirmButtonColor: "#ff914d"
+      });
+      return;
+    }
+
     if (this.idEndereco) {
       this.alterar();
     } else {

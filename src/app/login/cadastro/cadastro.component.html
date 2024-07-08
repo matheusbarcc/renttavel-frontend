@@ -13,13 +13,16 @@
         <div class="relative z-0 w-full group">
           <input [(ngModel)]="anfitriao.nome" type="text" name="floating_email" id="floating_email" class="block py-3 px-3 w-full text-sm text-gray-900 bg-transparent border border-rentcinza appearance-none focus:border-2 focus:outline-none focus:ring-0 focus:border-rentlaranja peer rounded-lg" placeholder=" " required />
           <label for="floating_nome" class="ml-2 px-2 peer-focus:font-medium absolute text-sm text-rentcinza duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-rentlaranja peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6 bg-rentbranco">Nome</label>
+          <div *ngIf="form.submitted && !anfitriao.nome" class="text-red-600 text-sm">Campo obrigatório.</div>
         </div>
         <div class="relative z-0 w-full group">
           <input [(ngModel)]="anfitriao.email" type="email" name="floating_email" id="floating_email" class="block py-3 px-3 w-full text-sm text-gray-900 bg-transparent border border-rentcinza appearance-none focus:border-2 focus:outline-none focus:ring-0 focus:border-rentlaranja peer rounded-lg" placeholder=" " required />
           <label for="floating_email" class="ml-2 px-2 peer-focus:font-medium absolute text-sm text-rentcinza duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-rentlaranja peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6 bg-rentbranco">Email</label>
+          <div *ngIf="form.submitted && !anfitriao.email" class="text-red-600 text-sm">Campo obrigatório.</div>
         </div>
         <div class="relative z-0 w-full group">
           <input [(ngModel)]="anfitriao.senha" type="senha" name="floating_email" id="floating_email" class="block py-3 px-3 w-full text-sm text-gray-900 bg-transparent border border-rentcinza appearance-none focus:border-2 focus:outline-none focus:ring-0 focus:border-rentlaranja peer rounded-lg" placeholder=" " required />
+          <div *ngIf="form.submitted && !anfitriao.senha" class="text-red-600 text-sm">Campo obrigatório.</div>
           <label for="floating_senha" class="ml-2 px-2 peer-focus:font-medium absolute text-sm text-rentcinza duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-rentlaranja peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6 bg-rentbranco">Senha</label>
         </div>
       </div>
